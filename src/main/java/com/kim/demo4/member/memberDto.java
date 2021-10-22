@@ -21,6 +21,7 @@ public class memberDto {
 	private String pwd;
 	private String address;
 	private String name;
+	private String gender;
 	private Timestamp created;
 
 

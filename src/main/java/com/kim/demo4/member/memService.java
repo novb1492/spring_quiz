@@ -4,6 +4,8 @@ import java.sql.Timestamp;
 import java.time.LocalDateTime;
 
 import org.json.simple.JSONObject;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -17,9 +19,10 @@ import Daos.memberDao;
 public class memService {
 	@Autowired
 	private memberDao memberDao;
+	private static Logger logger=LoggerFactory.getLogger(memService.class);
 	
 	public JSONObject insert(tryInsertDto insertDto) {
-		System.out.println("insert");
+		logger.debug("insert");
 		String message="회원가입에 성공했습니다";
 		try {
 			insertDto.getAddress();
@@ -28,15 +31,18 @@ public class memService {
 									.address(insertDto.getPostcode()+","+insertDto.getAddress()+","+insertDto.getDetailAddress())
 									.created(Timestamp.valueOf(LocalDateTime.now()))
 									.name(insertDto.getName())
+									.gender(insertDto.getGender())
 									.pwd(new BCryptPasswordEncoder().encode(insertDto.getPwd()))
 									.build();
 						
 			memberDao.insert(dto);
 		
 		} catch (Exception e) {
+			e.printStackTrace();
 			message="회원가입에 실패했습니다";
 		}
 		return utillService.makeJson(true, message);
 		
 	}
+	
 }

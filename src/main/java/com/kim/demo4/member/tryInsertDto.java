@@ -19,6 +19,9 @@ public class tryInsertDto {
 	@NotBlank
 	@Length(min = 4,max = 10,message = "비밀번호는 최소 4자리 최대 10자리입니다")
 	private String pwd;
+	@NotBlank
+	@Length(min = 4,max = 10,message = "비밀번호는 최소 4자리 최대 10자리입니다")
+	private String pwd2;
 	
 	@NotBlank(message = "우편번호가 빈칸입니다")
 	private String postcode;

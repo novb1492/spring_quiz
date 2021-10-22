@@ -2,6 +2,6 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="Daos.memberDao">
 	<insert id="insert" parameterType="com.kim.demo4.member.memberDto">
-		insert into test values(#{email},#{pwd})
+		insert into member values(#{pwd},#{email},#{address},#{gender},#{name})
 	</insert>
 </mapper>

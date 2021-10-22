@@ -7,16 +7,17 @@
 		<td>
 			<input type=text id='email' placeholder='E-Mail 입력'/> 
 		</td>
-		<td colspan="2"><input type="button" value="인증번호 전송"></td>
+		<td colspan="2"><input type="button" onclick="send()" value="인증번호 전송"></td>
+		이름:<input type=text id='name' placeholder='이름을입력'/>
 	</tr>
 	<tr>
 		<td align='right' height=40>패스워드</td>
 		<td>
-			<input type=text id='pw' placeholder='pw 입력'/> 
+			<input type=text id='pwd' placeholder='pw 입력'/> 
 		</td>
 		<td align='right'>패스워드 확인</td>
 		<td>
-			<input type=text id='pwOk' placeholder='pw 입력'/> 
+			<input type=text id='pwd2' placeholder='pw 입력'/> 
 		</td>
 	</tr>
 	<tr>
@@ -64,6 +65,40 @@
 </center>
 <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 <script>
+function send() {
+	 var email=getIdValue('email'); 
+	sendSns(email,'email','confrim');
+}
+function insert() {
+	 var email=getIdValue('email');
+		var pwd=getIdValue('pwd');	
+		var pwd2=getIdValue('pwd2');
+			var postcode=getIdValue('zipcode');
+				var address=getIdValue('addr1');
+					var detailAddress=getIdValue('addr2');
+						var gender='남자';
+						var name=getIdValue('name');
+		 alert(name);
+		 let data=JSON.stringify({
+				 "email":email,
+		         "pwd":pwd,
+		       	"pwd2":pwd2,
+		       		"postcode":postcode,
+		       			"address":address,
+		       				"detailAddress":detailAddress,
+		       					"gender":gender,
+		       					"name":name
+		        	 
+		});
+		 var reuslt=requestToServer('/demo4/user/crud/insert',data);
+		 console.log(result);
+		 alert(reuslt.message);
+		 if(reuslt.flag){
+			 location.href='/demo4/loginPage';
+		 	return;
+		 }
+}
+
 function sample6_execDaumPostcode() {
     new daum.Postcode({
         oncomplete: function(data) {
@@ -110,15 +145,5 @@ function sample6_execDaumPostcode() {
             document.getElementById("addr2").focus();
         }
     }).open();
-}
- function insert() {
-	 var email=getIdValue('email');
-
-	 alert(email);
-	 let data=JSON.stringify({
-			 "email":"test",
-	         "pwd":"pwd"
-	});
-	 requestServer()
 }
 </script>
