@@ -14,7 +14,7 @@ public class memService {
 	public void insert() {
 		System.out.println("insert");
 		memberDto memberDTO=new memberDto();
-		memberDTO.setEmail("em12313");
+		memberDTO.setEmail("ㅗㅗㅅㅅ");
 		memberDTO.setPwd("3123121");
 		memberDao.insert(memberDTO);
 	}
