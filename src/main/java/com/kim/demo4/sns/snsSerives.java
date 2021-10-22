@@ -33,5 +33,20 @@ public class snsSerives {
 		}else {
 			return utillService.makeJson(false, "지원하지 않는 인증 수단입니다");
 		}
+		
+	}
+	public void checkNum(tryCheckNumDto checkNumDto,HttpServletRequest request) {
+		logger.debug("send");
+		String kind=checkNumDto.getKind();
+		if(kind.equals("email")) {
+			logger.debug("email 인증번호 확인");
+			 mailService.confrimNum(checkNumDto,request);
+		}else if(kind.equals("phone")) {
+			logger.debug("phone 인증번호 확인");
+			
+			
+		}else {
+			 utillService.makeJson(false, "지원하지 않는 인증 수단입니다");
+		}
 	}
 }

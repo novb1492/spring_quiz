@@ -25,7 +25,7 @@
 		<td>
 			<input type=text id='authNum' placeholder='인증번호 입력'/> 
 		</td>
-		<td colspan="2"><input type="button" value="인증번호 확인"></td>
+		<td colspan="2"><input type="button" onclick="confrimNum()" value="인증번호 확인"></td>
 	</tr>
 	<tr>
 		<td align='right'>우편번호</td>
@@ -65,6 +65,15 @@
 </center>
 <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 <script>
+function confrimNum() {
+	 var num=getIdValue('authNum');
+		 let data=JSON.stringify({
+				 "num":num,
+		      	"kind":'email',
+		      	"detail":'confrim'
+		});
+	var result=requestPutToServer('/demo4/sns/confrim',data);
+}
 function send() {
 	 var email=getIdValue('email'); 
 	sendSns(email,'email','confrim');
@@ -78,7 +87,6 @@ function insert() {
 					var detailAddress=getIdValue('addr2');
 						var gender='남자';
 						var name=getIdValue('name');
-		 alert(name);
 		 let data=JSON.stringify({
 				 "email":email,
 		         "pwd":pwd,

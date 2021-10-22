@@ -17,6 +17,7 @@ import org.slf4j.LoggerFactory;
 import com.kim.demo4.member.memService;
 import com.kim.demo4.member.tryInsertDto;
 import com.kim.demo4.sns.MailService;
+import com.kim.demo4.sns.tryCheckNumDto;
 import com.kim.demo4.sns.trySendDto;
 
 
@@ -36,13 +37,18 @@ public class restController {
 
 	
 	@RequestMapping(value = "/user/crud/**",method = RequestMethod.POST)
-	public JSONObject tryJoin(@Valid @RequestBody tryInsertDto insertDto,HttpServletResponse response) {
+	public JSONObject tryJoin(@Valid @RequestBody tryInsertDto insertDto,HttpServletRequest request,HttpServletResponse response) {
 		logger.debug("tryJoin");
-		return memService.insert(insertDto);
+		return memService.insert(insertDto, request);
 	}
 	@RequestMapping(value = "/sns/**",method = RequestMethod.POST)
 	public JSONObject sendSns(@Valid @RequestBody trySendDto sendDto,HttpServletRequest request,HttpServletResponse response) {
 		logger.debug("sendSns");
 		return snsSerives.send(sendDto,request);
+	}
+	@RequestMapping(value = "/sns/**",method = RequestMethod.PUT)
+	public void sendSns(@Valid @RequestBody tryCheckNumDto checkNumDto,HttpServletRequest request,HttpServletResponse response) {
+		logger.debug("sendSns");
+		 snsSerives.checkNum(checkNumDto, request);
 	}
 }

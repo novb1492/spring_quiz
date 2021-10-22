@@ -25,5 +25,10 @@ public class utillService {
 	            num+=Integer.toString(random.nextInt(10));
 	        }
 	        return num;
-	   }
+	  }
+	 public static RuntimeException makeRunTimeEx(String message,String methodName) {
+		 logger.debug("makeRunTimeEx");
+		 logger.debug("에러 메소드: "+methodName);
+		return new RuntimeException(message);
+	}
 }

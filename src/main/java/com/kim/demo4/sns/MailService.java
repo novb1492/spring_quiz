@@ -1,5 +1,10 @@
 package com.kim.demo4.sns;
 
+import java.sql.Timestamp;
+import java.time.LocalDateTime;
+import java.util.HashMap;
+import java.util.Map;
+
 import javax.mail.internet.MimeMessage;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -22,6 +27,8 @@ public class MailService {
 	
 	@Autowired 
 	private JavaMailSender mailSender;
+	@Autowired
+	private confrimService confrimService;
 	
 	public JSONObject sendMail(trySendDto sendDto,HttpServletRequest request) {
 		logger.debug("sendMail");
@@ -30,10 +37,14 @@ public class MailService {
 			HttpSession session=request.getSession();
 			String randNum=utillService.GetRandomNum(numLength);
 			String email=sendDto.getPhoneOrEmail();
-			session.setAttribute("email", email);
-			session.setAttribute("num", randNum);
-			session.setAttribute("detail", sendDto.getDetail());
-			session.setAttribute("flag", false);
+			Map<String, Object>map=new HashMap<String, Object>();
+			map.put("email", email);
+			map.put("num", randNum);
+			map.put("detail",  sendDto.getDetail());
+			map.put("flag", false);
+			map.put("requestTime",  Timestamp.valueOf(LocalDateTime.now()));
+			session.setAttribute(sendDto.getDetail(), map);
+		
 			
 			sendMail(email, "안녕하세요 00입니다", "인증번호는 "+randNum+"입니다");
 		} catch (Exception e) {
@@ -41,6 +52,13 @@ public class MailService {
 		}
 	
 		return utillService.makeJson(true, message);
+	}
+	public void confrimNum(tryCheckNumDto checkNumDto,HttpServletRequest request) {
+		logger.debug("confrimNum");
+		HttpSession httpSession=request.getSession();
+		Map<String, Object>map=(Map<String, Object>) httpSession.getAttribute("confrim");
+		System.out.println(map.get("email"));
+		
 	}
     private void sendMail(String to, String subject, String body) {
 		MimeMessage message = mailSender.createMimeMessage();

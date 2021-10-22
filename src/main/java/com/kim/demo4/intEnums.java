@@ -2,7 +2,8 @@ package com.kim.demo4;
 
 public enum intEnums {
 	
-	randNumLength(10);
+	randNumLength(10),
+	coolTime(3);
 	
     private  int value;
     

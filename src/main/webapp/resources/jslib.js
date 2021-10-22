@@ -18,6 +18,25 @@ function requestToServer(url,data){
    return result;
    
 }
+function requestPutToServer(url,data){
+   $.ajax({
+       type: 'PUT',
+       url: url,
+       dataType : "json",
+       data: data,
+       contentType: "application/json; charset:UTF-8",
+       async: false,
+       xhrFields: {withCredentials: true},
+       success: function(response) {
+           result=response;
+       },
+   
+   });
+   console.log(result);
+   console.log('통신직후');
+   return result;
+   
+}
 function getIdValue(id){
 	return document.getElementById(id).value;
 }
