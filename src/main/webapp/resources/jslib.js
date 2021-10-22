@@ -1,13 +1,11 @@
-function test(){
-	alert('test');
+function requestToServer(url,data,protocol){
+    console.log('requestToServer');
 	var xmlHttpRequest = new XMLHttpRequest();
-    let data=JSON.stringify({
-		 "email":"test",
-         "pwd":"pwd"
-	}); 
-    xmlHttpRequest.open("POST", '/demo4/user/crud/insert', true);
+    xmlHttpRequest.open(prorocol, url, true);
     xmlHttpRequest.setRequestHeader("Content-Type", "application/json");
     // 혹은 application/x-json
-
     xmlHttpRequest.send(data);
+}
+function getIdValue(id){
+	return document.getElementById(id).value;
 }

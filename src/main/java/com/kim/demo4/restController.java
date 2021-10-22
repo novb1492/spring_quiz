@@ -7,9 +7,9 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
-
+import org.json.simple.JSONObject;
 import com.kim.demo4.member.memService;
-import com.kim.demo4.member.memberDto;
+import com.kim.demo4.member.tryInsertDto;
 
 @RestController
 public class restController {
@@ -17,8 +17,8 @@ public class restController {
 	private memService memService;
 	
 	@RequestMapping(value = "/user/crud/**",method = RequestMethod.POST)
-	public void tryJoin(@RequestBody memberDto memberDto,HttpServletResponse response) {
+	public JSONObject tryJoin(@RequestBody tryInsertDto insertDto,HttpServletResponse response) {
 		System.out.println("tryJoin");
-		memService.insert();
+		return memService.insert(insertDto);
 	}
 }
