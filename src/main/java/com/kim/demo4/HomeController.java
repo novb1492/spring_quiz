@@ -13,8 +13,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
-import com.kim.demo4.board.boardService;
-import com.kim.demo4.member.memService;
+
 
 
 
@@ -25,12 +24,7 @@ import com.kim.demo4.member.memService;
 @Controller
 public class HomeController {
 	
-		/*@Autowired
-		private memberService memberService;*/
-		@Autowired
-		private boardService boardService;
-		@Autowired
-		private memService memberService;
+	
 
 	
 	private static final Logger logger = LoggerFactory.getLogger(HomeController.class);
@@ -49,11 +43,7 @@ public class HomeController {
 		
 		model.addAttribute("serverTime", formattedDate );
 		
-		return "home";
+		return "index";
 	}
-	@GetMapping("/test")
-	public void test() {
-		System.out.println("test");
-		memberService.insert();
-	}
+
 }

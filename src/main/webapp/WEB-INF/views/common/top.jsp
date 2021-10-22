@@ -8,7 +8,7 @@ a:hover{color:#cc3300; font-weight:bold; }
 a:active{color:#ff00cc; text-decoration:underline; }
 -->
 </style>
-
+<script src="/demo4/resources/jslib.js"></script>
 <table width=800>
 	<tr><td align="center" colspan=5><h1>CARE Lab</h1></td></tr>
 	<tr align="right">
