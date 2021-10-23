@@ -41,6 +41,10 @@ public class memService {
 		
 		
 	}
+	public void login(tryLoginDto loginDto,HttpServletRequest request) {
+		logger.debug("login");
+		
+	}
 	private void confrim(tryInsertDto insertDto) {
 		logger.debug("confrim");
 		String message=null;

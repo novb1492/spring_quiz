@@ -18,6 +18,7 @@ import org.slf4j.LoggerFactory;
 import com.kim.demo4.apis.kakao.kakaoService;
 import com.kim.demo4.member.memService;
 import com.kim.demo4.member.tryInsertDto;
+import com.kim.demo4.member.tryLoginDto;
 import com.kim.demo4.sns.MailService;
 import com.kim.demo4.sns.tryCheckNumDto;
 import com.kim.demo4.sns.trySendDto;
@@ -43,6 +44,11 @@ public class restController {
 	public JSONObject tryJoin(@Valid @RequestBody tryInsertDto insertDto,HttpServletRequest request,HttpServletResponse response) {
 		logger.debug("tryJoin");
 		return memService.insert(insertDto, request);
+	}
+	@RequestMapping(value = "/login",method = RequestMethod.POST)
+	public void tryLogin(@Valid @RequestBody tryLoginDto loginDto,HttpServletRequest request,HttpServletResponse response) {
+		logger.debug("tryJoin");
+		 memService.login(loginDto, request);
 	}
 	@RequestMapping(value = "/user/crud/**",method = RequestMethod.GET)
 	public JSONObject checkSame(HttpServletRequest request,HttpServletResponse response) {
