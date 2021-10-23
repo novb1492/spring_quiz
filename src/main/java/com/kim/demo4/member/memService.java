@@ -2,6 +2,8 @@ package com.kim.demo4.member;
 
 import java.sql.Timestamp;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
 
 import javax.servlet.http.HttpServletRequest;
@@ -32,7 +34,9 @@ public class memService {
 		try {
 			boolean flag=(boolean)request.getSession().getAttribute("flag");
 			if(flag) {
-				return insert(insertDto);
+				insert(insertDto);
+				request.getSession().invalidate();
+				return utillService.makeJson(true, "회원가입 성공");
 			}
 			message="인증이 완료 되지 않았습니다";
 		} catch (RuntimeException e) {
@@ -51,6 +55,7 @@ public class memService {
 			if(!new BCryptPasswordEncoder().matches(loginDto.getPwd(), memberDto.getPwd())) {
 				throw new RuntimeException("비밀번호 불일치");
 			}
+			request.getSession().setAttribute("email",loginDto.getEmail() );
 			return utillService.makeJson(true, "로그인성공");
 		} catch (NullPointerException e) {
 			message="존재하는 이메일이 아닙니다";
@@ -102,7 +107,7 @@ public class memService {
 		return false;
 	}
 	
-	public JSONObject insert(tryInsertDto insertDto) {
+	public void insert(tryInsertDto insertDto) {
 		logger.debug("insert");
 		String message="회원가입에 성공했습니다";
 		try {
@@ -122,9 +127,8 @@ public class memService {
 		} catch (Exception e) {
 			e.printStackTrace();
 			message="회원가입에 실패했습니다";
-		}
-		return utillService.makeJson(true, message);
-		
+			throw utillService.makeRunTimeEx(message, "insert");
+		}	
 	}
 	
 }

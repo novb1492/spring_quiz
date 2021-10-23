@@ -1,6 +1,16 @@
 <%@ page contentType="text/html; charset=UTF-8"%>
+<%
+String email=(String)session.getAttribute("email");
+boolean flag=false;
+if(email==null){
+	flag=false;
+}else{
+	flag=true;
+}
+%>
 <style type="text/css">
-<!--
+
+
 
 a:link{color:black;font-family:sans-serif;text-decoration:none;}
 a:visited{color:black;font-family:sans-serif;text-decoration:none;}
@@ -15,9 +25,20 @@ a:active{color:#ff00cc; text-decoration:underline; }
 	<tr align="right">
 		<td width=600></td>
 		<td><a href="index.jsp">홈</a></td>
-		<td><a href="/demo4/loginPage">로그인</a></td>
+		<%if(flag){
+		%>
+			<td><a href="/demo4/loginPage">로그아웃</a></td>
+
+		<td><a href="index.jsp">게시판</a></td>
+		<% }else{
+			%>
+			<td><a href="/demo4/loginPage">로그인</a></td>
 		<td><a href="/demo4/joinPage">회원가입</a></td>
 		<td><a href="index.jsp">게시판</a></td>
+		<% }
+			%>
+		
+	
 	</tr>
 	<tr><td align="center" colspan=5><hr/></td></tr>
 </table>

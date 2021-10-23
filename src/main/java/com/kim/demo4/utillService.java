@@ -1,6 +1,10 @@
 package com.kim.demo4;
 
+
 import java.util.Random;
+
+
+import javax.servlet.http.HttpSession;
 
 import org.json.simple.JSONObject;
 import org.slf4j.Logger;
@@ -30,5 +34,9 @@ public class utillService {
 		 logger.debug("makeRunTimeEx");
 		 logger.debug("에러 메소드: "+methodName);
 		return new RuntimeException(message);
+	}
+	 public static void deleteSession(HttpSession session,String name) {
+		logger.debug("deleteSession");
+		session.removeAttribute(name);
 	}
 }
