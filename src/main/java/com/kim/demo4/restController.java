@@ -6,6 +6,7 @@ import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mail.javamail.JavaMailSender;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -14,6 +15,7 @@ import org.json.simple.JSONObject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import com.kim.demo4.apis.kakao.kakaoService;
 import com.kim.demo4.member.memService;
 import com.kim.demo4.member.tryInsertDto;
 import com.kim.demo4.sns.MailService;
@@ -31,7 +33,8 @@ public class restController {
 	
 	@Autowired
 	private com.kim.demo4.sns.snsSerives snsSerives;
-	
+	@Autowired
+	private kakaoService kakaoService;
 
 
 
@@ -56,4 +59,15 @@ public class restController {
 		logger.debug("sendSns");
 		 return snsSerives.checkNum(checkNumDto, request);
 	}
+	@RequestMapping(value = "/kakao/showPage",method = RequestMethod.GET)
+    public JSONObject showKakaoPage(HttpServletRequest request ,HttpServletResponse response) {
+		logger.info("showKakaoLoginPage restcontroller");
+        return kakaoService.showPage(request);
+    }
+    @GetMapping("/kakao/callback/**")
+    public void kakaoCallback(HttpServletRequest request ,HttpServletResponse response) {
+    	logger.info("showKakaoLoginPage restcontroller");
+        kakaoService.callback(request, response);
+       
+    }
 }

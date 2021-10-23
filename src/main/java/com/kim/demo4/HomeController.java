@@ -49,5 +49,9 @@ public class HomeController {
 	public String joinPagr() {
 		return "/member/memberForm";
 	}
+	@GetMapping("/loginPage")
+	public String loginPage() {
+		return "/member/loginForm";
+	}
 
 }

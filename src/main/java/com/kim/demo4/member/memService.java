@@ -54,6 +54,16 @@ public class memService {
 		}
 		throw utillService.makeRunTimeEx(message,"confrim" );
 	}
+	 public memberDto insertOauth(memberDto uservo) {
+		 	logger.debug("insertOauth");
+	        int already=memberDao.countByEmail(uservo.getEmail());
+	        if(already==0){
+	        	logger.debug(uservo+"로그인 회원가입시도");
+	        	uservo.setPwd(new BCryptPasswordEncoder().encode("oauthpwd"));
+	        	memberDao.insert(uservo);
+	        }
+	        return uservo;
+	    }
 	public JSONObject checkSame(HttpServletRequest request) {
 		logger.debug("checkSame");
 		String message=null;

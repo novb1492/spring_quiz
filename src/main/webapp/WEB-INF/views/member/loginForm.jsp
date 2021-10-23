@@ -1,5 +1,5 @@
 <%@ page contentType="text/html; charset=UTF-8"%>
-
+<%@ include file="../common/top.jsp" %>
 <center>
 <table>
 	<tr>
@@ -17,5 +17,17 @@
 		</td>
 	</tr>
 </table>
-</h3>
+<input type="button" value="카카오 로그인" onclick="callKakaoLogin()">
 </center>
+<script>
+function  callKakaoLogin(){
+    var url='/demo4/kakao/showPage?scope=login';
+    var result=requestGetToServer(url);
+    	if(result.flag){ 
+            this.child=window.open(result.message,'width=500','height=500');
+        }else{
+            alert(result.message);
+        }
+  
+}
+</script>

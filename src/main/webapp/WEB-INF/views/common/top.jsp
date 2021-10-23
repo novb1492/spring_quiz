@@ -15,7 +15,7 @@ a:active{color:#ff00cc; text-decoration:underline; }
 	<tr align="right">
 		<td width=600></td>
 		<td><a href="index.jsp">홈</a></td>
-		<td><a href="index.jsp">로그인</a></td>
+		<td><a href="/demo4/loginPage">로그인</a></td>
 		<td><a href="/demo4/joinPage">회원가입</a></td>
 		<td><a href="index.jsp">게시판</a></td>
 	</tr>

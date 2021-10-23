@@ -23,6 +23,7 @@ public class memberDto {
 	private String name;
 	private String gender;
 	private Timestamp created;
+	private String provider;
 
 
 
