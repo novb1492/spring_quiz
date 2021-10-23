@@ -26,7 +26,8 @@ public class memService {
 	
 	public JSONObject insert(tryInsertDto insertDto,HttpServletRequest request) {
 		logger.debug("insert");
-		String message=null;
+		String message="알수 없는 오류 발생";
+		confrim(insertDto);
 		try {
 			boolean flag=(boolean)request.getSession().getAttribute("flag");
 			if(flag) {
@@ -35,13 +36,26 @@ public class memService {
 			message="인증이 완료 되지 않았습니다";
 		} catch (RuntimeException e) {
 			message="인증요청을 번저 부탁드립니다";
-		}catch (Exception e) {
-			message="알수 없는 오류 발생";
 		}
 		throw utillService.makeRunTimeEx(message, "insert");
 		
 		
 	}
+	private void confrim(tryInsertDto insertDto) {
+		logger.debug("confrim");
+		String message=null;
+		if(!insertDto.getPwd().equals(insertDto.getPwd2())) {
+			message="비밀번호 불일치";
+		}else if(memberDao.countByEmail(insertDto.getEmail())!=0) {
+			message="이미존재하는 이메일입니다";
+		}else {
+			logger.debug("회원가입 유효성 통과");
+			return;
+		}
+		throw utillService.makeRunTimeEx(message,"confrim" );
+	}
+
+	
 	public JSONObject insert(tryInsertDto insertDto) {
 		logger.debug("insert");
 		String message="회원가입에 성공했습니다";

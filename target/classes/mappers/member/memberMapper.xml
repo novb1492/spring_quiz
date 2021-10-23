@@ -4,4 +4,7 @@
 	<insert id="insert" parameterType="com.kim.demo4.member.memberDto">
 		insert into member values(#{pwd},#{email},#{address},#{gender},#{name})
 	</insert>
+	<select id="countByEmail" resultType="_int">
+		SELECT count(*) FROM member where email=#{email}
+	</select>
 </mapper>
