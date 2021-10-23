@@ -73,7 +73,7 @@ public class kakaoLoginService {
                         .email((String)userInfor.get("email"))
                         .name((String)profile.get("nickname"))
                         .created(Timestamp.valueOf(LocalDateTime.now()))
-                        .gender("제공받지 못함")
+                        .gender("남")
                         .provider("kakao")
                         .build();
                         return vo;

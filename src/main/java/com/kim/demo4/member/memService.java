@@ -95,6 +95,7 @@ public class memService {
 									.name(insertDto.getName())
 									.gender(insertDto.getGender())
 									.pwd(new BCryptPasswordEncoder().encode(insertDto.getPwd()))
+									.provider("home")
 									.build();
 						
 			memberDao.insert(dto);
