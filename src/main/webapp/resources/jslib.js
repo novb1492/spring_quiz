@@ -40,8 +40,8 @@ function requestPutToServer(url,data){
 function getIdValue(id){
 	return document.getElementById(id).value;
 }
-function disabledById(id){
-	document.getElementById(id).disabled=true;	
+function disabledById(id,flag){
+	document.getElementById(id).disabled=flag;	
 }
 function sendSns(phoneOrEmail,kind,detail){
 	console.log('sendSns');
@@ -52,4 +52,7 @@ function sendSns(phoneOrEmail,kind,detail){
 	});
 	var result=requestToServer('/demo4/sns/send',data);
 	alert(result.message);
+	if(result.flag){
+		disabledById('sendNum',false);
+	}
 }

@@ -44,24 +44,31 @@ public class MailService {
 			map.put("flag", false);
 			map.put("requestTime", LocalDateTime.now());
 			session.setAttribute(sendDto.getDetail(), map);
-		
-			
 			sendMail(email, "안녕하세요 00입니다", "인증번호는 "+randNum+"입니다");
+			return utillService.makeJson(true, message);
 		} catch (Exception e) {
 			message="인증번호 전송실패";
 		}
 	
-		return utillService.makeJson(true, message);
+		return utillService.makeJson(false, message);
 	}
 	public JSONObject confrimNum(tryCheckNumDto checkNumDto,HttpServletRequest request) {
 		logger.debug("confrimNum");
-		HttpSession httpSession=request.getSession();
-		Map<String, Object>map=(Map<String, Object>) httpSession.getAttribute("confrim");
-		LocalDateTime requestTime=(LocalDateTime)map.get("requestTime");
-		System.out.println(map.get("requestTime")+" 요청시간");
-		confrimService.confrimNum(requestTime,(String)map.get("num"), checkNumDto.getNum());
-		httpSession.setAttribute("flag", true);
-		return utillService.makeJson(true, "인증이 완료되었습니다");
+		String message="알수 없는 에러발생";
+		try {
+			HttpSession httpSession=request.getSession();
+			Map<String, Object>map=(Map<String, Object>) httpSession.getAttribute("confrim");
+			LocalDateTime requestTime=(LocalDateTime)map.get("requestTime");
+			System.out.println(map.get("requestTime")+" 요청시간");
+			confrimService.confrimNum(requestTime,(String)map.get("num"), checkNumDto.getNum());
+			httpSession.setAttribute("flag", true);
+			
+			return utillService.makeJson(true, "인증에 성공했습니다");
+		} catch (NullPointerException e) {
+			message="인증요청부터 해주세요";
+		}
+		return utillService.makeJson(false, message);
+	
 	}
     private void sendMail(String to, String subject, String body) {
 		MimeMessage message = mailSender.createMimeMessage();
