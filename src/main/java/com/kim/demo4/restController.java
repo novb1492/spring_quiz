@@ -46,9 +46,9 @@ public class restController {
 		return memService.insert(insertDto, request);
 	}
 	@RequestMapping(value = "/login",method = RequestMethod.POST)
-	public void tryLogin(@Valid @RequestBody tryLoginDto loginDto,HttpServletRequest request,HttpServletResponse response) {
+	public JSONObject tryLogin(@Valid @RequestBody tryLoginDto loginDto,HttpServletRequest request,HttpServletResponse response) {
 		logger.debug("tryJoin");
-		 memService.login(loginDto, request);
+		 return memService.login(loginDto, request);
 	}
 	@RequestMapping(value = "/user/crud/**",method = RequestMethod.GET)
 	public JSONObject checkSame(HttpServletRequest request,HttpServletResponse response) {

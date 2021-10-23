@@ -5,7 +5,7 @@
 	<tr>
 		<td align='right' height=40>E-Mail</td>
 		<td>
-			<input type=text id='email' onkeyup="findEmail()" placeholder='E-Mail 입력'/> 
+			<input type="email" id='email' onkeyup="findEmail()" placeholder='E-Mail 입력'/> 
 		</td>
 		<td colspan="2"><input type="button" id="sendSns" onclick="send()" value="인증번호 전송"></td>
 		이름:<input type=text id='name' placeholder='이름을입력'/>

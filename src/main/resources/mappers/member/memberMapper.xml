@@ -7,4 +7,15 @@
 	<select id="countByEmail" resultType="_int">
 		SELECT count(*) FROM member where email=#{email}
 	</select>
+	<resultMap type="com.kim.demo4.member.memberDto" id="member">
+		<result property="provider" column="provider"/>
+		<result property="pwd" column="pwd"/>
+		<result property="name" column="name"/>
+		<result property="email" column="email"/>
+		<result property="address" column="address"/>
+		<result property="gender" column="gender"/>
+	</resultMap>
+	<select id="findByEmail" resultMap="member">
+		select email,pwd from member where email=#{email}
+	</select>
 </mapper>

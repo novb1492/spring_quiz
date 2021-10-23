@@ -18,6 +18,7 @@ import com.kim.demo4.utillService;
 import Daos.memberDao;
 
 
+
 @Service
 public class memService {
 	@Autowired
@@ -41,8 +42,22 @@ public class memService {
 		
 		
 	}
-	public void login(tryLoginDto loginDto,HttpServletRequest request) {
+	public JSONObject login(tryLoginDto loginDto,HttpServletRequest request) {
 		logger.debug("login");
+		String message="로그인에 실패했습니다";
+		try {
+			memberDto memberDto=memberDao.findByEmail(loginDto.getEmail());
+			System.out.println(memberDto.getPwd());
+			if(!new BCryptPasswordEncoder().matches(loginDto.getPwd(), memberDto.getPwd())) {
+				throw new RuntimeException("비밀번호 불일치");
+			}
+			return utillService.makeJson(true, "로그인성공");
+		} catch (NullPointerException e) {
+			message="존재하는 이메일이 아닙니다";
+		}catch (RuntimeException e) {
+			message=e.getMessage();
+		}
+		return utillService.makeJson(false, message);
 		
 	}
 	private void confrim(tryInsertDto insertDto) {

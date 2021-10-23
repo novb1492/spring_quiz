@@ -10,4 +10,5 @@ import com.kim.demo4.member.memberDto;
 public interface memberDao {
 	public int insert(memberDto memberDTO);
 	public int countByEmail(String email);
+	public memberDto findByEmail(String email);
 }
