@@ -52,8 +52,14 @@ public class restController {
 	}
 	@RequestMapping(value = "/user/crud/**",method = RequestMethod.GET)
 	public JSONObject checkSame(HttpServletRequest request,HttpServletResponse response) {
-		logger.debug("tryJoin");
+		logger.debug("checkSame");
 		return memService.checkSame(request);
+	}
+	@RequestMapping(value = "/user/**",method = RequestMethod.GET)
+	public void logout(HttpServletRequest request,HttpServletResponse response) {
+		logger.debug("logout");
+		request.getSession().invalidate();
+		utillService.doRedirect(response, "/demo4/");
 	}
 	@RequestMapping(value = "/sns/**",method = RequestMethod.POST)
 	public JSONObject sendSns(@Valid @RequestBody trySendDto sendDto,HttpServletRequest request,HttpServletResponse response) {

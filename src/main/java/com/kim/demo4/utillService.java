@@ -1,9 +1,10 @@
 package com.kim.demo4;
 
 
+import java.io.IOException;
 import java.util.Random;
 
-
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.json.simple.JSONObject;
@@ -38,5 +39,15 @@ public class utillService {
 	 public static void deleteSession(HttpSession session,String name) {
 		logger.debug("deleteSession");
 		session.removeAttribute(name);
+	}
+	 public static void doRedirect(HttpServletResponse response,String url) {
+		logger.debug("doRedirect");
+		logger.info(url+"리다이렉트 요청 url");
+	        try {
+	            response.sendRedirect(url);
+	        } catch (IOException e) {
+	            e.printStackTrace();
+	            logger.info("doRedirect error"+e.getMessage());
+	        }
 	}
 }
