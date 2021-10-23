@@ -5,7 +5,7 @@
 	<tr>
 		<td align='right' height=40>E-Mail</td>
 		<td>
-			<input type=text id='email' placeholder='E-Mail 입력'/> 
+			<input type=text id='email' onkeyup="findEmail()" placeholder='E-Mail 입력'/> 
 		</td>
 		<td colspan="2"><input type="button" id="sendSns" onclick="send()" value="인증번호 전송"></td>
 		이름:<input type=text id='name' placeholder='이름을입력'/>
@@ -65,6 +65,15 @@
 </center>
 <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 <script>
+function findEmail() {
+	 var email=getIdValue('email'); 
+	 var result=requestGetToServer('/demo4/user/crud/find?email='+email);
+	 if(result.flag){
+		 document.getElementById("testDiv").style.backgroundColor = "red";  
+	 }else{
+		 document.getElementById("testDiv").style.backgroundColor = "#db0d36";
+	 }
+}
 function confrimNum() {
 	 var num=getIdValue('authNum');
 		 let data=JSON.stringify({

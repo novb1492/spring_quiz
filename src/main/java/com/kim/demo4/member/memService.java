@@ -46,7 +46,7 @@ public class memService {
 		String message=null;
 		if(!insertDto.getPwd().equals(insertDto.getPwd2())) {
 			message="비밀번호 불일치";
-		}else if(memberDao.countByEmail(insertDto.getEmail())!=0) {
+		}else if(countByEmail(insertDto.getEmail())) {
 			message="이미존재하는 이메일입니다";
 		}else {
 			logger.debug("회원가입 유효성 통과");
@@ -54,7 +54,24 @@ public class memService {
 		}
 		throw utillService.makeRunTimeEx(message,"confrim" );
 	}
-
+	public JSONObject checkSame(HttpServletRequest request) {
+		logger.debug("checkSame");
+		String message=null;
+		boolean flag=countByEmail(request.getParameter("email"));
+		if(flag) {
+			message="이미존재 하는 이메일입니다";
+		}else {
+			message="사용가능한 이메일입니다";
+		}
+		return utillService.makeJson(false, message);
+	}
+	private boolean countByEmail(String email) {
+		logger.debug("countByEmail");
+		if(memberDao.countByEmail(email)!=0) {
+			return true;
+		}
+		return false;
+	}
 	
 	public JSONObject insert(tryInsertDto insertDto) {
 		logger.debug("insert");

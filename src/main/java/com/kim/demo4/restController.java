@@ -41,6 +41,11 @@ public class restController {
 		logger.debug("tryJoin");
 		return memService.insert(insertDto, request);
 	}
+	@RequestMapping(value = "/user/crud/**",method = RequestMethod.GET)
+	public JSONObject checkSame(HttpServletRequest request,HttpServletResponse response) {
+		logger.debug("tryJoin");
+		return memService.checkSame(request);
+	}
 	@RequestMapping(value = "/sns/**",method = RequestMethod.POST)
 	public JSONObject sendSns(@Valid @RequestBody trySendDto sendDto,HttpServletRequest request,HttpServletResponse response) {
 		logger.debug("sendSns");
