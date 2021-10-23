@@ -40,6 +40,9 @@ function requestPutToServer(url,data){
 function getIdValue(id){
 	return document.getElementById(id).value;
 }
+function disabledById(id){
+	document.getElementById(id).disabled=true;	
+}
 function sendSns(phoneOrEmail,kind,detail){
 	console.log('sendSns');
 	 var data=JSON.stringify({
@@ -47,5 +50,6 @@ function sendSns(phoneOrEmail,kind,detail){
 			"kind":kind,
 			"detail":detail
 	});
-	requestToServer('/demo4/sns/send',data);
+	var result=requestToServer('/demo4/sns/send',data);
+	alert(result.message);
 }

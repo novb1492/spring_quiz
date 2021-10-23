@@ -42,7 +42,7 @@ public class MailService {
 			map.put("num", randNum);
 			map.put("detail",  sendDto.getDetail());
 			map.put("flag", false);
-			map.put("requestTime",  Timestamp.valueOf(LocalDateTime.now()));
+			map.put("requestTime", LocalDateTime.now());
 			session.setAttribute(sendDto.getDetail(), map);
 		
 			
@@ -53,12 +53,15 @@ public class MailService {
 	
 		return utillService.makeJson(true, message);
 	}
-	public void confrimNum(tryCheckNumDto checkNumDto,HttpServletRequest request) {
+	public JSONObject confrimNum(tryCheckNumDto checkNumDto,HttpServletRequest request) {
 		logger.debug("confrimNum");
 		HttpSession httpSession=request.getSession();
 		Map<String, Object>map=(Map<String, Object>) httpSession.getAttribute("confrim");
-		System.out.println(map.get("email"));
-		
+		LocalDateTime requestTime=(LocalDateTime)map.get("requestTime");
+		System.out.println(map.get("requestTime")+" 요청시간");
+		confrimService.confrimNum(requestTime,(String)map.get("num"), checkNumDto.getNum());
+		httpSession.setAttribute("flag", true);
+		return utillService.makeJson(true, "인증이 완료되었습니다");
 	}
     private void sendMail(String to, String subject, String body) {
 		MimeMessage message = mailSender.createMimeMessage();

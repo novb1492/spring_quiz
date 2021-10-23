@@ -47,8 +47,8 @@ public class restController {
 		return snsSerives.send(sendDto,request);
 	}
 	@RequestMapping(value = "/sns/**",method = RequestMethod.PUT)
-	public void sendSns(@Valid @RequestBody tryCheckNumDto checkNumDto,HttpServletRequest request,HttpServletResponse response) {
+	public JSONObject sendSns(@Valid @RequestBody tryCheckNumDto checkNumDto,HttpServletRequest request,HttpServletResponse response) {
 		logger.debug("sendSns");
-		 snsSerives.checkNum(checkNumDto, request);
+		 return snsSerives.checkNum(checkNumDto, request);
 	}
 }

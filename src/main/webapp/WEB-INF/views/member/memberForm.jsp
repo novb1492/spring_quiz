@@ -7,7 +7,7 @@
 		<td>
 			<input type=text id='email' placeholder='E-Mail 입력'/> 
 		</td>
-		<td colspan="2"><input type="button" onclick="send()" value="인증번호 전송"></td>
+		<td colspan="2"><input type="button" id="sendSns" onclick="send()" value="인증번호 전송"></td>
 		이름:<input type=text id='name' placeholder='이름을입력'/>
 	</tr>
 	<tr>
@@ -25,7 +25,7 @@
 		<td>
 			<input type=text id='authNum' placeholder='인증번호 입력'/> 
 		</td>
-		<td colspan="2"><input type="button" onclick="confrimNum()" value="인증번호 확인"></td>
+		<td colspan="2"><input type="button" id="sendNum" onclick="confrimNum()" value="인증번호 확인"></td>
 	</tr>
 	<tr>
 		<td align='right'>우편번호</td>
@@ -73,6 +73,11 @@ function confrimNum() {
 		      	"detail":'confrim'
 		});
 	var result=requestPutToServer('/demo4/sns/confrim',data);
+	alert(result.message);
+	if(result.flag){
+		disabledById('sendSns');
+		disabledById('sendNum');
+	}
 }
 function send() {
 	 var email=getIdValue('email'); 

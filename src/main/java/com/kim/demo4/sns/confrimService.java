@@ -15,10 +15,10 @@ public class confrimService {
 	private static Logger logger=LoggerFactory.getLogger(confrimService.class);
 	private final int confrimCoolMin=intEnums.coolTime.getValue();
 	
-	public void confrimNum(Timestamp reqTimestamp,String num,String submitNum) {
+	public void confrimNum(LocalDateTime requestTime ,String num,String submitNum) {
 		logger.debug("confrimNum");
 		String message=null;
-		if(LocalDateTime.now().isAfter(reqTimestamp.toLocalDateTime().plusMinutes(confrimCoolMin))) {
+		if(LocalDateTime.now().isAfter(requestTime.plusMinutes(confrimCoolMin))) {
 			message="유효시간이 지났습니다";
 		}else if(!num.equals(submitNum)) {
 			message="인증번호 불일치";
