@@ -6,22 +6,17 @@
 	<tr>
 		<td style="width: 80px; height:40px;" align="right">작성자</td>
 		<td style="width: 570px; height:40px;">
-			<input type=text name='writer'/> 
+			<%=email %>
 		</td>
 	</tr>
 	<tr>
 		<td  style="width: 80px; height:40px;" align="right">제 목</td>
 		<td style="width: 570px; height:40px;">
-			<input type=text name='title' style="width: 500px; "/> 
+			<input type=text name='title' placeholder="촤대 30자입니다" style="width: 500px; "/> 
 		</td>
 	</tr>
 	<tr>
 		<td colspan=2 align="right"><textarea style="width: 650px; height: 300px" id="editor"></textarea></td>
-	</tr>
-	<tr>
-		<td align='right' height=40 colspan=2>
-			<input type=file style="width: 300px; "/> 
-		</td>
 	</tr>
 	<tr>
 		<td align='center' height=40 colspan=2>
@@ -38,7 +33,7 @@ class MyUploadAdapter {
         // CKEditor 5's FileLoader instance.
       this.loader = props;
       // URL where to send files.
-      this.url = 'http://localhost:8080/co/imageUpload';
+      this.url = 'http://localhost:8080/demo4/imageUpload';
     }
 
     // Starts the upload process.

@@ -1,7 +1,11 @@
 package com.kim.demo4;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,6 +15,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.json.simple.JSONObject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -22,6 +28,7 @@ import com.kim.demo4.member.tryLoginDto;
 import com.kim.demo4.sns.MailService;
 import com.kim.demo4.sns.tryCheckNumDto;
 import com.kim.demo4.sns.trySendDto;
+import com.kim.demo4.uploadService.uploadService;
 
 
 
@@ -36,6 +43,9 @@ public class restController {
 	private com.kim.demo4.sns.snsSerives snsSerives;
 	@Autowired
 	private kakaoService kakaoService;
+	
+	@Autowired
+	private uploadService uploadService;
 
 
 
@@ -80,6 +90,12 @@ public class restController {
     public void kakaoCallback(HttpServletRequest request ,HttpServletResponse response) {
     	logger.info("showKakaoLoginPage restcontroller");
         kakaoService.callback(request, response);
+       
+    }
+    @RequestMapping("/imageUpload")
+    public void imageUpload(MultipartHttpServletRequest request,HttpSession session,HttpServletResponse response) {
+        logger.debug("imageUpload요청");   
+        uploadService.imageUpload();
        
     }
 }

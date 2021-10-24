@@ -16,11 +16,5 @@ public class boardService {
 	
 	 private final static Logger logger=LoggerFactory.getLogger(kakaoService.class);
 	
-	 public void checkLogin(HttpSession session,HttpServletResponse response) {
-		 logger.debug("checkLogin");
-		 String email=(String)session.getAttribute("email");
-		 if(email==null) {
-			 utillService.doRedirect(response, "/demo4/");
-		 }
-	 }
+	 
 }

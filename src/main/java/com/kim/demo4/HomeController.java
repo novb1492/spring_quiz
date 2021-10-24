@@ -70,7 +70,7 @@ public class HomeController {
 	}
 	@GetMapping("/writePage")
 	public String writePage(HttpSession session,HttpServletResponse response,Model model) {
-		boardService.checkLogin(session, response);
+		utillService.checkLogin(session, response);
 		model.addAttribute("email", session.getAttribute("email"));
 		return "/board/writeForm";
 	}

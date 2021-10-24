@@ -50,4 +50,10 @@ public class utillService {
 	            logger.info("doRedirect error"+e.getMessage());
 	        }
 	}
+	 public static void checkLogin(HttpSession session,HttpServletResponse response) {
+		 String email=(String)session.getAttribute("email");
+		 if(email==null) {
+			 doRedirect(response, "/demo4/");
+		 }
+	}
 }
