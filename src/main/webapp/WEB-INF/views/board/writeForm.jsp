@@ -39,7 +39,7 @@ function insert() {
 	var result=requestToServer('/demo4/board/curd/insert',data);
 	alert(result.message);
 	if(result.flag){
-		location.href='/demo4/boardPage';
+		location.href='/demo4/boardPage?page=1';
 	}
 }
 class MyUploadAdapter {

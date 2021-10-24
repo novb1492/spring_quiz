@@ -2,6 +2,8 @@ package com.kim.demo4;
 
 
 import java.io.IOException;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Random;
 
 import javax.servlet.http.HttpServletResponse;
@@ -57,4 +59,30 @@ public class utillService {
 			 doRedirect(response, "/demo4/");
 		 }
 	}
+	 public static int getTotalPage(int totalCount,int pagesize) {
+		 logger.debug("getTotalpages");
+		 logger.debug("총 개수"+totalCount);
+	        int totalpage=0;
+	        totalpage=totalCount/pagesize;
+	        if(totalCount%pagesize>0){
+	            totalpage++;
+	        }
+	        logger.debug(totalpage+"전체페이지");
+	        if(totalpage==0){
+	            totalpage=1;
+	        }
+	        logger.debug(totalpage+" 전체 페이지");
+	        return totalpage;
+	}
+	    public static Map<String, Integer> getStart(int nowPage,int pagesize) {
+	    	logger.debug("getPagingStartEnd");
+	    	int start=0;
+	    	Map<String, Integer>map=new HashMap<>();
+	    	if(nowPage!=1) {
+	    		start=(nowPage-1)*pagesize+1;
+			}
+			map.put("start", start);
+			map.put("end", start+pagesize);
+			return map;
+		}
 }
