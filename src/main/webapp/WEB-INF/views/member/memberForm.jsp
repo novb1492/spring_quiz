@@ -69,11 +69,14 @@
 function findEmail() {
 	 var email=getIdValue('email'); 
 	 var result=requestGetToServer('/demo4/user/crud/find?email='+email);
+	 var color="red"
 	 if(result.flag){
-		 document.getElementById("testDiv").style.backgroundColor = "red";  
+		 color="red";
+		 alert('중복된이메일입니다');
 	 }else{
-		 document.getElementById("testDiv").style.backgroundColor = "#db0d36";
+		 color="blue";
 	 }
+	 document.getElementById("email").style.backgroundColor = color;
 }
 function confrimNum() {
 	 var num=getIdValue('authNum');

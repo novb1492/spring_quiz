@@ -94,6 +94,7 @@ public class memService {
 		boolean flag=countByEmail(request.getParameter("email"));
 		if(flag) {
 			message="이미존재 하는 이메일입니다";
+			return utillService.makeJson(true, message);
 		}else {
 			message="사용가능한 이메일입니다";
 		}
