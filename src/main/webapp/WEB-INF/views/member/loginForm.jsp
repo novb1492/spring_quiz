@@ -29,7 +29,7 @@ function login() {
 	});
 	 var reuslt=requestToServer('/demo4/login',data);
 	 if(reuslt.flag){
-		 location.href='/demo4/board';
+		 location.href='/demo4/boardPage';
 	 }else{
 		 alert(result.message);
 	 }
@@ -39,7 +39,7 @@ function  callKakaoLogin(){
     var url='/demo4/kakao/showPage?scope=login';
     var result=requestGetToServer(url);
     	if(result.flag){ 
-            this.child=window.open(result.message,'width=500','height=500');
+    		location.href=result.message;
         }else{
             alert(result.message);
         }

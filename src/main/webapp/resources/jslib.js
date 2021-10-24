@@ -72,3 +72,18 @@ function sendSns(phoneOrEmail,kind,detail){
 		disabledById('sendNum',false);
 	}
 }
+function makeEditor(id){
+	ClassicEditor
+.create( document.querySelector(id), {
+        extraPlugins: [ MyCustomUploadAdapterPlugin ],
+
+        // ...
+    } )
+	.then( newEditor  => {
+        console.log( 'Editor was initialized', newEditor  );
+        editor = newEditor ;
+    } )
+	.catch( error => {
+	   
+} );
+}

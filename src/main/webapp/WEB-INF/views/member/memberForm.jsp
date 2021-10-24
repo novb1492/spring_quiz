@@ -1,6 +1,7 @@
 <%@ page contentType="text/html; charset=UTF-8"%>
-<%@ include file="../common/top.jsp" %>
+
 <center>
+<%@ include file="../common/top.jsp" %>
 <table>
 	<tr>
 		<td align='right' height=40>E-Mail</td>

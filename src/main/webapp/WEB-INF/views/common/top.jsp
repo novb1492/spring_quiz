@@ -29,12 +29,12 @@ a:active{color:#ff00cc; text-decoration:underline; }
 		%>
 		<td><%=email %></td>
 		<td><a href="/demo4/user/logout">로그아웃</a></td>
-		<td><a href="index.jsp">게시판</a></td>
+		<td><a href="/demo4/boardPage">게시판</a></td>
 		<% }else{
 			%>
 			<td><a href="/demo4/loginPage">로그인</a></td>
 			<td><a href="/demo4/joinPage">회원가입</a></td>
-			<td><a href="index.jsp">게시판</a></td>
+			<td><a href="/demo4/boardPage">게시판</a></td>
 		<% }
 			%>
 		

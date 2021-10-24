@@ -54,7 +54,7 @@ public class kakaoService {
 	        LOGGER.info("tryKakaoLogin");
 	        memberDto uservo =kakaoLoginService.tryLogin(request,apiKey);
 	        request.getSession().setAttribute("email", uservo.getEmail());
-	       utillService.doRedirect(response, "/demo4/doneLoingPage");
+	       utillService.doRedirect(response, "/demo4/");
 	       
 	    }
 }

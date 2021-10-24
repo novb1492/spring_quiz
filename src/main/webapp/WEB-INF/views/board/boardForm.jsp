@@ -1,10 +1,9 @@
 <%@ page contentType="text/html; charset=UTF-8"%>
-
 <center>
+<%@ include file="../common/top.jsp" %>
 <table style="width: 650px; ">
 	<thead>
 	<tr>
-		<th style="width: 40px; height:20px;" align="center">선택</th>
 		<th style="width: 330px; height:20px;" align="center">제 목</th>
 		<th style="width: 80px; height:20px;" align="center">작성자</th>
 		<th style="width: 120px; height:20px;" align="center">작성일</th>
@@ -19,14 +18,12 @@
 		<td style="width: 80px; height:20px;" align="center"><hr/></td>
 	</tr>
 	<tr>
-		<td style="width: 40px; height:40px;" align="center"><input type="checkbox"/></td>
 		<td style="width: 330px; height:40px;" align="center">자주 이용해 주세요</td>
 		<td style="width: 80px; height:40px;" align="center">관리자</td>
 		<td style="width: 120px; height:40px;" align="center">20xx.xx.xx</td>
 		<td style="width: 80px; height:40px;" align="center">1</td>
 	</tr>
 	<tr>
-		<td style="width: 40px; height:40px;" align="center"><input type="checkbox"/></td>
 		<td style="width: 330px; height:40px;" align="center">게시판 확인</td>
 		<td style="width: 80px; height:40px;" align="center">관리자</td>
 		<td style="width: 120px; height:40px;" align="center">20xx.xx.xx</td>
@@ -34,10 +31,14 @@
 	</tr>
 	<tr><td colspan=5><hr/></td></tr>
 	<tr>
-		<td colspan=2><input type="checkbox"/>전체선택</td>
+
 		<td colspan=3 align="right">
-			<input type="button" value='삭제' style="width: 100px; "/>
-			<input type="button" value='글쓰기' style="width: 100px; "/>
+			<%if(flag){
+			%>
+			<input type="button" value='글쓰기' onclick="goWritePage()" style="width: 100px; "/>
+			<%}%>
+			
+			
 		</td>
 	</tr>
 	<tr><td colspan=5><hr/></td></tr>
@@ -57,3 +58,8 @@
 </tr>
 </table>
 </center>
+<script>
+function goWritePage() {
+	location.href='/demo4/writePage';
+}
+</script>
