@@ -4,6 +4,7 @@ import java.text.DateFormat;
 import java.util.Date;
 import java.util.Locale;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
@@ -33,7 +34,7 @@ public class HomeController {
 	@Autowired
 	private boardService boardService;
 
-	
+	private final String dtos=stringEnums.dtos.getValue();
 	private static final Logger logger = LoggerFactory.getLogger(HomeController.class);
 	
 	/**
@@ -65,7 +66,9 @@ public class HomeController {
 		return "/member/doneLoginPage";
 	}
 	@GetMapping("/boardPage")
-	public String boardPage() {
+	public String boardPage(HttpServletRequest request,HttpServletResponse response,Model model) {
+		model.addAttribute(dtos, boardService.getArticles(request));
+		model.addAttribute("test", "test");
 		return "/board/boardForm";
 	}
 	@GetMapping("/writePage")

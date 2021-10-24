@@ -2,7 +2,8 @@ package com.kim.demo4;
 
 public enum stringEnums {
 	
-	email("email");
+	email("email"),
+	dtos("dtos");
 	
     private  String value;
     

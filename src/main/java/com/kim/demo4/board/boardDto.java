@@ -18,4 +18,5 @@ public class boardDto {
 	private String text;
 	private String title;
 	private Timestamp created;
+	private int hit;
 }

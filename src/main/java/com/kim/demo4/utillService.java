@@ -15,7 +15,8 @@ import org.slf4j.LoggerFactory;
 
 public class utillService {
 	private static Logger logger=LoggerFactory.getLogger(utillService.class);
-	
+	 private static  String getEmail=stringEnums.email.getValue();
+	 
 	public static JSONObject makeJson(boolean flag,String message) {
 		logger.debug("makeJson");
 		JSONObject response=new JSONObject();
@@ -51,7 +52,7 @@ public class utillService {
 	        }
 	}
 	 public static void checkLogin(HttpSession session,HttpServletResponse response) {
-		 String email=(String)session.getAttribute("email");
+		 String email=(String)session.getAttribute(getEmail);
 		 if(email==null) {
 			 doRedirect(response, "/demo4/");
 		 }

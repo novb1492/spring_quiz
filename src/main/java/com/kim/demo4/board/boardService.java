@@ -2,6 +2,7 @@ package com.kim.demo4.board;
 
 import java.sql.Timestamp;
 import java.time.LocalDateTime;
+import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -35,6 +36,7 @@ public class boardService {
 					.email((String)session.getAttribute(getEmail))
 					.text(articleInsertDto.getText())
 					.title(articleInsertDto.getTitle())
+					.hit(0)
 					.build();
 					boardDao.insert(dto);
 					return utillService.makeJson(true, "작성완료");
@@ -42,6 +44,10 @@ public class boardService {
 			return utillService.makeJson(false, "글 저장에 실패했습니다");
 		}
 		
+	}
+	 public List<boardDto> getArticles(HttpServletRequest request) {
+		logger.debug("getArticles");
+		return boardDao.selectAll();
 	}
 	 
 	 

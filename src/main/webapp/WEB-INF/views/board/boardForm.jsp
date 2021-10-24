@@ -1,6 +1,13 @@
+<%@page import="com.kim.demo4.stringEnums"%>
+<%@page import="com.kim.demo4.board.boardDto"%>
+<%@page import="java.util.List"%>
 <%@ page contentType="text/html; charset=UTF-8"%>
 <center>
 <%@ include file="../common/top.jsp" %>
+<%
+List<boardDto>dtos=(List<boardDto>)request.getAttribute(stringEnums.dtos.getValue());
+%>
+
 <table style="width: 650px; ">
 	<thead>
 	<tr>
@@ -29,6 +36,17 @@
 		<td style="width: 120px; height:40px;" align="center">20xx.xx.xx</td>
 		<td style="width: 80px; height:40px;" align="center">10</td>
 	</tr>
+	<%
+		for(boardDto b: dtos){
+			%>
+			<tr>
+		<td style="width: 330px; height:40px;" align="center"><a href="/demo4/article?bid=<%=b.getId()%>"><%=b.getTitle() %></a></td>
+		<td style="width: 80px; height:40px;" align="center"><%=b.getEmail() %></td>
+		<td style="width: 120px; height:40px;" align="center"><%=b.getCreated() %></td>
+		<td style="width: 80px; height:40px;" align="center"><%=b.getHit() %></td>
+	</tr>
+		<% }
+	%>
 	<tr><td colspan=5><hr/></td></tr>
 	<tr>
 
@@ -50,15 +68,18 @@
 	<select>
 		<option>전체</option>
 		<option>제목</option>
-		<option>작성자</option>
 	</select>
-	<input type=text name='search'/>
-	<input type=button name='searchBtn' value='검색' style="width: 80px; "/>
+	<input type=text id='search'/>
+	<input type=button name='searchBtn' onclick="search()" value='검색' style="width: 80px; "/>
 </td>
 </tr>
 </table>
 </center>
 <script>
+function search() {
+	var title=getIdValue('search');
+	location.href='/demo4/boardPage?title='+title;
+}
 function goWritePage() {
 	location.href='/demo4/writePage';
 }
