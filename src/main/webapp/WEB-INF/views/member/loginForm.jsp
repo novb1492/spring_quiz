@@ -18,6 +18,7 @@
 	</tr>
 </table>
 <input type="button" value="카카오 로그인" onclick="callKakaoLogin()">
+<input type="button" value="네이버 로그인" onclick="callNaverLogin()">
 </center>
 <script>
 function login() {
@@ -37,6 +38,16 @@ function login() {
 }
 function  callKakaoLogin(){
     var url='/demo4/kakao/showPage?scope=login';
+    var result=requestGetToServer(url);
+    	if(result.flag){ 
+    		location.href=result.message;
+        }else{
+            alert(result.message);
+        }
+  
+}
+function callNaverLogin(){
+    var url='/demo4/naver/showPage';
     var result=requestGetToServer(url);
     	if(result.flag){ 
     		location.href=result.message;

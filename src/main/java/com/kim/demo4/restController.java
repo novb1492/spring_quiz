@@ -23,6 +23,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.kim.demo4.apis.kakao.kakaoService;
+import com.kim.demo4.apis.naver.naverService;
 import com.kim.demo4.board.boardService;
 import com.kim.demo4.board.tryArticleInsertDto;
 import com.kim.demo4.board.tryDeleteDto;
@@ -52,6 +53,8 @@ public class restController {
 	private uploadService uploadService;
 	@Autowired
 	private boardService boardService;
+	@Autowired
+	private naverService naverService;
 
 
 
@@ -116,5 +119,15 @@ public class restController {
 		utillService.checkLogin(session, response);
 		return boardService.delete(request, session);
 	}
+	   @GetMapping("/naver/showPage")
+	    public JSONObject showNaverLoginPage(HttpServletRequest request ,HttpServletResponse response) {
+	        logger.info("showNaverLoginPage restcontroller");
+	        return naverService.getNaverLogin();
+	    }
+	    @GetMapping("/naver/loginCallback")
+	    public void naverLoginCallback(HttpServletRequest request ,HttpServletResponse response) {
+	    	logger.info("naverLoginCallback restcontroller");
+	        naverService.tryNaverLogin(request,response);
+	    }
 
 }
