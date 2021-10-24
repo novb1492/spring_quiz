@@ -16,4 +16,7 @@
 	<select id="selectAll" parameterType="Map" resultMap="getAllBoardDto" >
 		select b.*,(select count(*) from article)totalcount from(select ROW_NUMBER() OVER (ORDER BY id desc)  num, a.* from board a ) b where num between #{start} and #{pagesize}
 	</select>
+	<select id="selectAllWithKeyword" parameterType="Map" resultMap="getAllBoardDto" >
+		select b.*,(select count(*) from article where title like '%'||#{keyword}||'%')totalcount from(select ROW_NUMBER() OVER (ORDER BY id desc)  num, a.* from board a ) b where title like '%'||#{keyword}||'%' and num between #{start} and #{pagesize}
+	</select>
 </mapper>

@@ -49,14 +49,16 @@ public class boardService {
 		}
 		
 	}
-	 public List<getAllBoardDto> getArticles(HttpServletRequest request) {
+	 public List<boardDto> getArticles(HttpServletRequest request) {
 		logger.debug("getArticles");
-		Map<String, Integer>map=new HashMap<String, Integer>();
-		map.put("start", Integer.parseInt(request.getParameter("page")));
-		map.put("pagesize", pageSize);
-		List<getAllBoardDto>getAllBoardDtos=boardDao.selectAll(map);
+		String page=request.getParameter("page");
+		String keyword=request.getParameter("keyword");
+		List<getAllBoardDto>getAllBoardDtos=getGetAllBoardDtos(page, keyword);
 		List<boardDto>dtos=new ArrayList<boardDto>();
 		//System.out.println(dtos.get(0).getCreated().toString().split("0")[0]);
+		if(getAllBoardDtos.size()==0) {
+			throw new RuntimeException("검색결과 미존재");
+		}
 		for(getAllBoardDto g:getAllBoardDtos) {
 			boardDto dto=new boardDto();
 			dto.setCreated(g.getCreated());
@@ -64,8 +66,20 @@ public class boardService {
 			dto.setHit(g.getHit());
 			dto.setId(g.getId());
 			dto.setTitle(g.getTitle());
+			dtos.add(dto);
 		}
-		return boardDao.selectAll(map);
+		return dtos;
+	}
+	 private List<getAllBoardDto> getGetAllBoardDtos(String page,String keyword) {
+		logger.debug("getGetAllBoardDtos");
+		Map<String, Object>map=new HashMap<String, Object>();
+		map.put("start", Integer.parseInt(page));
+		map.put("pagesize", pageSize);
+		if(keyword==null||keyword.isBlank()) {
+			return boardDao.selectAll(map);
+		}
+		map.put("keyword", keyword);
+		return  boardDao.selectAllWithKeyword(map);
 	}
 	 
 	 

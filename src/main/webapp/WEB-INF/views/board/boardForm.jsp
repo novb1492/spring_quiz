@@ -6,7 +6,7 @@
 <center>
 <%@ include file="../common/top.jsp" %>
 <%
-List<getAllBoardDto>dtos=(List<getAllBoardDto>)request.getAttribute(stringEnums.dtos.getValue());
+List<boardDto>dtos=(List<boardDto>)request.getAttribute(stringEnums.dtos.getValue());
 %>
 
 <table style="width: 650px; ">
@@ -38,7 +38,7 @@ List<getAllBoardDto>dtos=(List<getAllBoardDto>)request.getAttribute(stringEnums.
 		<td style="width: 80px; height:40px;" align="center">10</td>
 	</tr>
 	<%
-		for(getAllBoardDto b: dtos){
+		for(boardDto b: dtos){
 			%>
 			<tr>
 		<td style="width: 330px; height:40px;" align="center"><a href="/demo4/article?bid=<%=b.getId()%>"><%=b.getTitle() %></a></td>
@@ -79,7 +79,7 @@ List<getAllBoardDto>dtos=(List<getAllBoardDto>)request.getAttribute(stringEnums.
 <script>
 function search() {
 	var title=getIdValue('search');
-	location.href='/demo4/boardPage?title='+title;
+	location.href='/demo4/boardPage?page=1&keyword='+title;
 }
 function goWritePage() {
 	location.href='/demo4/writePage';

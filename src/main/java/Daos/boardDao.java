@@ -12,5 +12,6 @@ import com.kim.demo4.board.getAllBoardDto;
 public interface boardDao {
 	
 	public int insert(boardDto boardDto);
-	public List<getAllBoardDto>selectAll(Map<String, Integer>map);
+	public List<getAllBoardDto>selectAll(Map<String, Object>map);
+	public List<getAllBoardDto>selectAllWithKeyword(Map<String, Object>map);
 }
