@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
@@ -92,10 +93,13 @@ public class restController {
         kakaoService.callback(request, response);
        
     }
-    @RequestMapping("/imageUpload")
-    public void imageUpload(MultipartHttpServletRequest request,HttpSession session,HttpServletResponse response) {
-        logger.debug("imageUpload요청");   
-        uploadService.imageUpload();
-       
-    }
+    @RequestMapping(value = "/img",method = RequestMethod.POST)
+	public void img(MultipartHttpServletRequest request) {
+		System.out.println("img");
+		 List<MultipartFile> multipartFiles=new ArrayList<MultipartFile>();
+	
+				multipartFiles = request.getFiles("report");
+			
+	        System.out.println(multipartFiles.toString());
+	}
 }

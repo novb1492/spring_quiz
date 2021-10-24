@@ -14,3 +14,7 @@
 	</tr>
 </table>
 </center>
+ <form action="/demo4/img" method="POST" enctype="multipart/form-data">
+        <input type="file" name="report" /><br/>
+        <input type="submit" value="sss" />
+    </form>

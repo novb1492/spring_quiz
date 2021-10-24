@@ -2,8 +2,8 @@ package com.kim.demo4.member;
 
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Size;
 
-import org.hibernate.validator.constraints.Length;
 
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -17,10 +17,10 @@ public class tryInsertDto {
 	private String email;
 	
 	@NotBlank
-	@Length(min = 4,max = 10,message = "비밀번호는 최소 4자리 최대 10자리입니다")
+	@Size(min = 4,max = 10,message = "비밀번호는 최소 4자리 최대 10자리입니다")
 	private String pwd;
 	@NotBlank
-	@Length(min = 4,max = 10,message = "비밀번호는 최소 4자리 최대 10자리입니다")
+	@Size(min = 4,max = 10,message = "비밀번호는 최소 4자리 최대 10자리입니다")
 	private String pwd2;
 	
 	@NotBlank(message = "우편번호가 빈칸입니다")
