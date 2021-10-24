@@ -16,7 +16,9 @@ import com.amazonaws.services.s3.AmazonS3;
 @Service
 public class awsService {
 	
-    private awsConfig awsConfig=new awsConfig();
+	@Autowired
+    private awsConfig awsConfig;
+	
     private final String awsS3Url="https://s3.ap-northeast-2.amazonaws.com/kimsshop/images/";
     public JSONObject  uploadAws(MultipartFile multipartFile,String bucketName) {
    
@@ -26,7 +28,7 @@ public class awsService {
         try {
 			awsConfig.fileupload(bucketName, saveName, file);
 		} catch (FileNotFoundException e) {
-			// TODO Auto-generated catch block
+		
 			e.printStackTrace();
 		}
     

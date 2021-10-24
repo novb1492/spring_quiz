@@ -94,12 +94,9 @@ public class restController {
        
     }
     @RequestMapping(value = "/img",method = RequestMethod.POST)
-	public void img(MultipartHttpServletRequest request) {
+	public JSONObject img(MultipartHttpServletRequest request) {
 		System.out.println("img");
-		 List<MultipartFile> multipartFiles=new ArrayList<MultipartFile>();
-	
-				multipartFiles = request.getFiles("upload");
-			
-	        System.out.println(multipartFiles.toString());
-	}
+		return uploadService.imageUpload(request);
+    }
+
 }
