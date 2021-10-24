@@ -1,6 +1,7 @@
 package Daos;
 
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.stereotype.Repository;
 
@@ -11,5 +12,5 @@ import com.kim.demo4.board.getAllBoardDto;
 public interface boardDao {
 	
 	public int insert(boardDto boardDto);
-	public List<getAllBoardDto>selectAll();
+	public List<getAllBoardDto>selectAll(Map<String, Integer>map);
 }

@@ -2,7 +2,10 @@ package com.kim.demo4.board;
 
 import java.sql.Timestamp;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -47,7 +50,20 @@ public class boardService {
 	}
 	 public List<getAllBoardDto> getArticles(HttpServletRequest request) {
 		logger.debug("getArticles");
-		return boardDao.selectAll();
+		Map<String, Integer>map=new HashMap<String, Integer>();
+		map.put("start", 0);
+		map.put("pagesize", 10);
+		List<getAllBoardDto>getAllBoardDtos=boardDao.selectAll(map);
+		List<boardDto>dtos=new ArrayList<boardDto>();
+		for(getAllBoardDto g:getAllBoardDtos) {
+			boardDto dto=new boardDto();
+			dto.setCreated(g.getCreated());
+			dto.setEmail(g.getEmail());
+			dto.setHit(g.getHit());
+			dto.setId(g.getId());
+			dto.setTitle(g.getTitle());
+		}
+		return boardDao.selectAll(map);
 	}
 	 
 	 
