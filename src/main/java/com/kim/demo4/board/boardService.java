@@ -28,6 +28,7 @@ public class boardService {
 	
 	 private final static Logger logger=LoggerFactory.getLogger(boardService.class);
 	 private final String getEmail=stringEnums.email.getValue();
+	 private final int pageSize=10;
 	 @Autowired
 	 private boardDao boardDao;
 	 
@@ -51,10 +52,11 @@ public class boardService {
 	 public List<getAllBoardDto> getArticles(HttpServletRequest request) {
 		logger.debug("getArticles");
 		Map<String, Integer>map=new HashMap<String, Integer>();
-		map.put("start", 0);
-		map.put("pagesize", 10);
+		map.put("start", Integer.parseInt(request.getParameter("page")));
+		map.put("pagesize", pageSize);
 		List<getAllBoardDto>getAllBoardDtos=boardDao.selectAll(map);
 		List<boardDto>dtos=new ArrayList<boardDto>();
+		//System.out.println(dtos.get(0).getCreated().toString().split("0")[0]);
 		for(getAllBoardDto g:getAllBoardDtos) {
 			boardDto dto=new boardDto();
 			dto.setCreated(g.getCreated());
