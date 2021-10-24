@@ -7,6 +7,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import org.json.simple.JSONObject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,17 +27,21 @@ public class boardService {
 	 @Autowired
 	 private boardDao boardDao;
 	 
-	 public void insert(tryArticleInsertDto articleInsertDto,HttpSession session) {
+	 public JSONObject insert(tryArticleInsertDto articleInsertDto,HttpSession session) {
 		logger.debug("insert");
-	
-		boardDto dto=boardDto.builder()
-								.created(Timestamp.valueOf(LocalDateTime.now()))
-								.email((String)session.getAttribute(getEmail))
-								.text(articleInsertDto.getText())
-								.title(articleInsertDto.getTitle())
-								.build();
-		System.out.println(dto.getText());
-		boardDao.insert(dto);
+		try {
+			boardDto dto=boardDto.builder()
+					.created(Timestamp.valueOf(LocalDateTime.now()))
+					.email((String)session.getAttribute(getEmail))
+					.text(articleInsertDto.getText())
+					.title(articleInsertDto.getTitle())
+					.build();
+					boardDao.insert(dto);
+					return utillService.makeJson(true, "작성완료");
+		} catch (Exception e) {
+			return utillService.makeJson(false, "글 저장에 실패했습니다");
+		}
+		
 	}
 	 
 	 

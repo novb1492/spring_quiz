@@ -104,10 +104,10 @@ public class restController {
 		return uploadService.imageUpload(request);
     }
 	@RequestMapping(value = "/board/curd/**",method = RequestMethod.POST)
-	public void tryInsertArticle( @RequestBody tryArticleInsertDto articleInsertDto ,HttpSession session,HttpServletResponse response) {
+	public JSONObject tryInsertArticle(@Valid @RequestBody tryArticleInsertDto articleInsertDto ,HttpSession session,HttpServletResponse response) {
 		logger.debug("tryInsertArticle");
 		utillService.checkLogin(session, response);
-		boardService.insert(articleInsertDto, session);
+		return boardService.insert(articleInsertDto, session);
 	}
 
 }
