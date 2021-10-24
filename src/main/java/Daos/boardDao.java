@@ -16,4 +16,5 @@ public interface boardDao {
 	public List<getAllBoardDto>selectAllWithKeyword(Map<String, Object>map);
 	public boardDto findById(int id);
 	public int deleteById(int id);
+	public int plusHit(Map<String, Integer>map);
 }

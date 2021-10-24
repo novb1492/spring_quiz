@@ -40,11 +40,11 @@ public class boardService {
 	 
 	 public JSONObject delete(HttpServletRequest request,HttpSession session) {
 			logger.debug("delete");
-			boardDto boardDto=getArticle(request);
+			int id=Integer.parseInt(request.getParameter("bid"));
+			boardDto boardDto=findArticle(id);
 			if(!boardDto.getEmail().equals(session.getAttribute(getEmail).toString())){
 				return utillService.makeJson(false, "작성자가 일치하지 않습니다");
 			}
-			int id=Integer.parseInt(request.getParameter("bid"));
 			boardDao.deleteById(id);
 			List<String>imgs=utillService.getImgSrc(boardDto.getText());
 			if(imgs.size()>0) {
@@ -122,6 +122,16 @@ public class boardService {
 	public boardDto getArticle(HttpServletRequest request) {
 		logger.debug("getArticle");
 		int id=Integer.parseInt(request.getParameter("bid"));
+		boardDto boardDto=findArticle(id);
+		Map<String, Integer>map=new HashMap<String, Integer>();
+		boardDto.setHit(boardDto.getHit()+1);
+		map.put("id", id);
+		map.put("hit", boardDto.getHit());
+		boardDao.plusHit(map);
+		return boardDto;
+	}
+	private boardDto findArticle(int id) {
+		logger.debug("getArticle");
 		boardDto boardDto=boardDao.findById(id);
 		return boardDto;
 	}

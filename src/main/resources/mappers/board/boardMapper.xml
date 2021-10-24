@@ -33,4 +33,7 @@
 	<delete id="deleteById"  >
 	delete from board where id=#{id}
 	</delete>
+	<update id="plusHit"  parameterType="Map">
+			update board set hit=#{hit} where id=#{id}
+	</update>
 </mapper>
