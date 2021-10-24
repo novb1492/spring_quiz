@@ -36,6 +36,21 @@ function requestPutToServer(url,data){
    return result;
    
 }
+function requestDelteToServer(url){
+   $.ajax({
+       type: 'DELETE',
+       url: url,
+       async: false,
+       xhrFields: {withCredentials: true},
+       success: function(response) {
+           result=response;
+       },
+   });
+   console.log(result);
+   console.log('통신직후');
+   return result;
+   
+}
 function requestGetToServer(url){
    $.ajax({
        type: 'GET',

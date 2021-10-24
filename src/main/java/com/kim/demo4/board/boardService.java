@@ -34,6 +34,16 @@ public class boardService {
 	 @Autowired
 	 private boardDao boardDao;
 	 
+	 public JSONObject delete(HttpServletRequest request,HttpSession session) {
+			logger.debug("delete");
+			/*boardDto boardDto=getArticle(request);
+			if(!boardDto.getEmail().equals(session.getAttribute(getEmail).toString())){
+				return utillService.makeJson(false, "작성자가 일치하지 않습니다");
+			}*/
+			boardDao.deleteById(24);
+			return utillService.makeJson(true, "글삭제 완료");
+	}
+	 
 	 public JSONObject insert(tryArticleInsertDto articleInsertDto,HttpSession session) {
 		logger.debug("insert");
 		try {

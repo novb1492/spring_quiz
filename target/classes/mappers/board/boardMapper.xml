@@ -30,4 +30,7 @@
 	<select id="findById"  resultMap="boardDto" >
 			select * from board where id=#{id}
 	</select>
+	<delete id="deleteById"  >
+	delete from board where id=#{id}
+	</delete>
 </mapper>

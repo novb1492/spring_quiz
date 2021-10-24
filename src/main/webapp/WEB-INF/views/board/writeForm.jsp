@@ -36,7 +36,7 @@ function insert() {
 		 "text":editor.getData(),
 		 "title":getIdValue('title')
 	});
-	var result=requestToServer('/demo4/board/curd/insert',data);
+	var result=requestToServer('/demo4/board/crud/insert',data);
 	alert(result.message);
 	if(result.flag){
 		location.href='/demo4/boardPage?page=1';

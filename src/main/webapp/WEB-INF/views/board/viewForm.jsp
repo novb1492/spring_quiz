@@ -33,7 +33,7 @@ boardDto boardDto=(boardDto)request.getAttribute("dto");
 		<td colspan=2 align="right">
 			<input type=button style="width: 60px; " value='글쓰기'/> 
 			<input type=button style="width: 60px; " value='수정'/>
-			<input type=button style="width: 60px; " value='삭제'/>
+			<input type=button style="width: 60px; " onclick="trydelete()" value='삭제'/>
 			<input type=button style="width: 60px; " onclick="back()"  value='목록'/>
 		</td>
 	</tr>
@@ -46,6 +46,10 @@ boardDto boardDto=(boardDto)request.getAttribute("dto");
 </table>
 </center>
 <script>
+function trydelete() {
+	var bid=getParam('bid');
+	requestDelteToServer('/demo4/board/crud/delete?id='+bid);
+}
 function back() {
 	var page=getParam('inPage');
 	var keyword=getParam('keyword');

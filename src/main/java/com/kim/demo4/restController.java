@@ -25,6 +25,7 @@ import org.slf4j.LoggerFactory;
 import com.kim.demo4.apis.kakao.kakaoService;
 import com.kim.demo4.board.boardService;
 import com.kim.demo4.board.tryArticleInsertDto;
+import com.kim.demo4.board.tryDeleteDto;
 import com.kim.demo4.member.memService;
 import com.kim.demo4.member.tryInsertDto;
 import com.kim.demo4.member.tryLoginDto;
@@ -103,11 +104,17 @@ public class restController {
 		utillService.checkLogin(session, response);
 		return uploadService.imageUpload(request);
     }
-	@RequestMapping(value = "/board/curd/**",method = RequestMethod.POST)
+	@RequestMapping(value = "/board/crud/**",method = RequestMethod.POST)
 	public JSONObject tryInsertArticle(@Valid @RequestBody tryArticleInsertDto articleInsertDto ,HttpSession session,HttpServletResponse response) {
 		logger.debug("tryInsertArticle");
 		utillService.checkLogin(session, response);
 		return boardService.insert(articleInsertDto, session);
+	}
+	@RequestMapping(value = "/board/crud/**",method = RequestMethod.DELETE)
+	public JSONObject tryDeleteArticle(HttpServletRequest request  ,HttpSession session,HttpServletResponse response) {
+		logger.debug("tryDeleteArticle");
+		utillService.checkLogin(session, response);
+		return boardService.delete(request, session);
 	}
 
 }
