@@ -34,7 +34,7 @@ public class HomeController {
 	@Autowired
 	private boardService boardService;
 
-	private final String dtos=stringEnums.dtos.getValue();
+
 	private static final Logger logger = LoggerFactory.getLogger(HomeController.class);
 	
 	/**
@@ -67,13 +67,15 @@ public class HomeController {
 	}
 	@GetMapping("/boardPage")
 	public String boardPage(HttpServletRequest request,HttpServletResponse response,Model model) {
-		model.addAttribute(dtos, boardService.getArticles(request));
+		boardService.getArticles(request,model);
 		return "/board/boardForm";
 	}
 	@GetMapping("/writePage")
 	public String writePage(HttpSession session,HttpServletResponse response,Model model) {
 		utillService.checkLogin(session, response);
 		model.addAttribute("email", session.getAttribute("email"));
+		model.addAttribute("nowPage", 2);
+		model.addAttribute("totalPage", 10);
 		return "/board/writeForm";
 	}
 

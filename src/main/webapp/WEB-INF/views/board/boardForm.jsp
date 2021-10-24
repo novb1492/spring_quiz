@@ -7,10 +7,12 @@
 <%@ include file="../common/top.jsp" %>
 <%
 List<boardDto>dtos=(List<boardDto>)request.getAttribute(stringEnums.dtos.getValue());
+int nowPage=(int)request.getAttribute("page");
+int totalPage=(int)request.getAttribute("totalPage");
 
 %>
 
-<table style="width: 650px; ">
+<table style="width: 650px;">
 	<thead>
 	<tr>
 		<th style="width: 330px; height:20px;" align="center">제 목</th>
@@ -74,7 +76,9 @@ List<boardDto>dtos=(List<boardDto>)request.getAttribute(stringEnums.dtos.getValu
 	</tr>
 	<tr><td colspan=5><hr/></td></tr>
 </table>
-이전 1 2 3 4 다음
+<input type="button" id="next" value="next" onclick="movePage(1)">
+<%=nowPage %>/<%=totalPage %>
+<input type="button" id="before" value="before" onclick="movePage(-1)">
 <table>
 <tr>
 <td>
@@ -89,6 +93,18 @@ List<boardDto>dtos=(List<boardDto>)request.getAttribute(stringEnums.dtos.getValu
 </table>
 </center>
 <script>
+if(<%=nowPage %>==1){
+	disabledById('before',true);
+}
+if(<%=nowPage %>==<%=totalPage %>){
+	disabledById('next',true);
+}
+function movePage(num) {
+	var page=getParam('page');
+	var keyword=getParam('keyword');
+	page=page*1;
+	location.href='/demo4/boardPage?page='+(page+num)+'&keyword='+keyword;
+}
 function search() {
 	var title=getIdValue('search');
 	location.href='/demo4/boardPage?page=1&keyword='+title;

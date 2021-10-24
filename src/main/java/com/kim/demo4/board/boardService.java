@@ -16,6 +16,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.ui.Model;
 
 import com.kim.demo4.stringEnums;
 import com.kim.demo4.utillService;
@@ -28,7 +29,8 @@ public class boardService {
 	
 	 private final static Logger logger=LoggerFactory.getLogger(boardService.class);
 	 private final String getEmail=stringEnums.email.getValue();
-	 private final int pageSize=10;
+		private final String dtostext=stringEnums.dtos.getValue();
+	 private final int pageSize=2;
 	 @Autowired
 	 private boardDao boardDao;
 	 
@@ -49,15 +51,24 @@ public class boardService {
 		}
 		
 	}
-	 public List<boardDto> getArticles(HttpServletRequest request) {
+	 public void getArticles(HttpServletRequest request,Model model) {
 		logger.debug("getArticles");
-		String page=request.getParameter("page");
+		System.out.println("fds");
+		int page=Integer.parseInt(request.getParameter("page"));
 		String keyword=request.getParameter("keyword");
-		List<getAllBoardDto>getAllBoardDtos=getGetAllBoardDtos(page, keyword);
+		Map<String, Integer>map=utillService.getStart(page, pageSize);
+		List<getAllBoardDto>getAllBoardDtos=getGetAllBoardDtos(map, keyword);
 		List<boardDto>dtos=new ArrayList<boardDto>();
 		//System.out.println(dtos.get(0).getCreated().toString().split("0")[0]);
 		if(getAllBoardDtos.size()==0) {
-			return null;
+			model.addAttribute("page", 1);
+			model.addAttribute("totalPage", 1);
+			model.addAttribute(dtostext, null);
+			return;
+		}
+		int totalPage=utillService.getTotalPage(getAllBoardDtos.get(0).getTotalcount(), pageSize);
+		if(page>totalPage) {
+			throw new RuntimeException("마지막페이지입니다");
 		}
 		for(getAllBoardDto g:getAllBoardDtos) {
 			boardDto dto=new boardDto();
@@ -68,13 +79,16 @@ public class boardService {
 			dto.setTitle(g.getTitle());
 			dtos.add(dto);
 		}
-		return dtos;
+		model.addAttribute("page", page);
+		model.addAttribute("totalPage", totalPage);
+		model.addAttribute(dtostext, dtos);
+		
 	}
-	 private List<getAllBoardDto> getGetAllBoardDtos(String page,String keyword) {
+	 private List<getAllBoardDto> getGetAllBoardDtos(Map<String, Integer>map2,String keyword) {
 		logger.debug("getGetAllBoardDtos");
 		Map<String, Object>map=new HashMap<String, Object>();
-		map.put("start", Integer.parseInt(page));
-		map.put("pagesize", pageSize);
+		map.put("start",map2.get("start"));
+		map.put("pagesize" ,map2.get("end"));
 		if(keyword==null||keyword.isBlank()) {
 			return boardDao.selectAll(map);
 		}
