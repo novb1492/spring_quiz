@@ -45,7 +45,7 @@ public class boardService {
 		}
 		
 	}
-	 public List<boardDto> getArticles(HttpServletRequest request) {
+	 public List<getAllBoardDto> getArticles(HttpServletRequest request) {
 		logger.debug("getArticles");
 		return boardDao.selectAll();
 	}

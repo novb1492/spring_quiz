@@ -4,15 +4,16 @@
 	<insert id="insert" parameterType="com.kim.demo4.board.boardDto">
 		insert into board values(boardid.NEXTVAL,#{title},#{text},#{email},#{created},#{hit})
 	</insert>
-	<resultMap type="com.kim.demo4.board.boardDto" id="board">
+	<resultMap type="com.kim.demo4.board.getAllBoardDto" id="getAllBoardDto">
 		<result property="id" column="id"/>
 		<result property="title" column="title"/>
 		<result property="text" column="text"/>
 		<result property="email" column="writer"/>
 		<result property="created" column="created"/>
 		<result property="hit" column="hit"/>
+		<result property="totalcount" column="totalcount"/>
 	</resultMap>
-	<select id="selectAll" resultMap="board" >
-		select * from board 
+	<select id="selectAll" resultMap="getAllBoardDto" >
+		select b.*,(select count(*) from article)totalcount from(select ROW_NUMBER() OVER (ORDER BY id desc)  num, a.* from board a ) b where num between 0 and 10
 	</select>
 </mapper>

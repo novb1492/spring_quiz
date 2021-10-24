@@ -1,3 +1,4 @@
+<%@page import="com.kim.demo4.board.getAllBoardDto"%>
 <%@page import="com.kim.demo4.stringEnums"%>
 <%@page import="com.kim.demo4.board.boardDto"%>
 <%@page import="java.util.List"%>
@@ -5,7 +6,7 @@
 <center>
 <%@ include file="../common/top.jsp" %>
 <%
-List<boardDto>dtos=(List<boardDto>)request.getAttribute(stringEnums.dtos.getValue());
+List<getAllBoardDto>dtos=(List<getAllBoardDto>)request.getAttribute(stringEnums.dtos.getValue());
 %>
 
 <table style="width: 650px; ">
@@ -37,7 +38,7 @@ List<boardDto>dtos=(List<boardDto>)request.getAttribute(stringEnums.dtos.getValu
 		<td style="width: 80px; height:40px;" align="center">10</td>
 	</tr>
 	<%
-		for(boardDto b: dtos){
+		for(getAllBoardDto b: dtos){
 			%>
 			<tr>
 		<td style="width: 330px; height:40px;" align="center"><a href="/demo4/article?bid=<%=b.getId()%>"><%=b.getTitle() %></a></td>

@@ -68,7 +68,6 @@ public class HomeController {
 	@GetMapping("/boardPage")
 	public String boardPage(HttpServletRequest request,HttpServletResponse response,Model model) {
 		model.addAttribute(dtos, boardService.getArticles(request));
-		model.addAttribute("test", "test");
 		return "/board/boardForm";
 	}
 	@GetMapping("/writePage")
