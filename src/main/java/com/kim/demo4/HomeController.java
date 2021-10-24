@@ -78,5 +78,10 @@ public class HomeController {
 		model.addAttribute("totalPage", 10);
 		return "/board/writeForm";
 	}
+	@GetMapping("/articlePage")
+	public String showArticlePage(HttpServletRequest request,HttpServletResponse response,Model model) {
+		model.addAttribute("dto", boardService.getArticle(request));
+		return "/board/viewForm";
+	}
 
 }

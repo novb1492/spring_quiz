@@ -45,7 +45,7 @@ int totalPage=(int)request.getAttribute("totalPage");
 		for(boardDto b:dtos){
 			%>
 			<tr>
-		<td style="width: 330px; height:40px;" align="center"><a href="/demo4/article?bid=<%=b.getId()%>"><%=b.getTitle() %></a></td>
+		<td style="width: 330px; height:40px;" align="center"><a href="/demo4/articlePage?bid=<%=b.getId()%>&inPage=<%=nowPage%>"><%=b.getTitle() %></a></td>
 		<td style="width: 80px; height:40px;" align="center"><%=b.getEmail() %></td>
 		<td style="width: 120px; height:40px;" align="center"><%=b.getCreated() %></td>
 		<td style="width: 80px; height:40px;" align="center"><%=b.getHit() %></td>

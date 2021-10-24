@@ -19,4 +19,15 @@
 	<select id="selectAllWithKeyword" parameterType="Map" resultMap="getAllBoardDto" >
 		select b.*,(select count(*) from board where title like '%'||#{keyword}||'%')totalcount from(select ROW_NUMBER() OVER (ORDER BY id desc)  num, a.* from board a ) b where title like '%'||#{keyword}||'%' and num between #{start} and #{pagesize}
 	</select>
+		<resultMap type="com.kim.demo4.board.boardDto" id="boardDto">
+		<result property="id" column="id"/>
+		<result property="title" column="title"/>
+		<result property="text" column="text"/>
+		<result property="email" column="writer"/>
+		<result property="created" column="created"/>
+		<result property="hit" column="hit"/>
+	</resultMap>
+	<select id="findById"  resultMap="boardDto" >
+			select * from board where id=#{id}
+	</select>
 </mapper>

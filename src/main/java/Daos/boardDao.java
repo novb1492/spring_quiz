@@ -14,4 +14,5 @@ public interface boardDao {
 	public int insert(boardDto boardDto);
 	public List<getAllBoardDto>selectAll(Map<String, Object>map);
 	public List<getAllBoardDto>selectAllWithKeyword(Map<String, Object>map);
+	public boardDto findById(int id);
 }

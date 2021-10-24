@@ -95,6 +95,12 @@ public class boardService {
 		map.put("keyword", keyword);
 		return  boardDao.selectAllWithKeyword(map);
 	}
+	public boardDto getArticle(HttpServletRequest request) {
+		logger.debug("getArticle");
+		int id=Integer.parseInt(request.getParameter("bid"));
+		boardDto boardDto=boardDao.findById(id);
+		return boardDto;
+	}
 	 
 	 
 }
