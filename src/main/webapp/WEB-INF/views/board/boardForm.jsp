@@ -9,7 +9,10 @@
 List<boardDto>dtos=(List<boardDto>)request.getAttribute(stringEnums.dtos.getValue());
 int nowPage=(int)request.getAttribute("page");
 int totalPage=(int)request.getAttribute("totalPage");
-
+String keyword=request.getParameter("keyword");
+if(keyword==null){
+	keyword="";
+}
 %>
 
 <table style="width: 650px;">
@@ -45,7 +48,7 @@ int totalPage=(int)request.getAttribute("totalPage");
 		for(boardDto b:dtos){
 			%>
 			<tr>
-		<td style="width: 330px; height:40px;" align="center"><a href="/demo4/articlePage?bid=<%=b.getId()%>&inPage=<%=nowPage%>"><%=b.getTitle() %></a></td>
+		<td style="width: 330px; height:40px;" align="center"><a href="/demo4/articlePage?bid=<%=b.getId()%>&inPage=<%=nowPage%>&keyword=<%=keyword%>"><%=b.getTitle() %></a></td>
 		<td style="width: 80px; height:40px;" align="center"><%=b.getEmail() %></td>
 		<td style="width: 120px; height:40px;" align="center"><%=b.getCreated() %></td>
 		<td style="width: 80px; height:40px;" align="center"><%=b.getHit() %></td>

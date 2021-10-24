@@ -2,6 +2,7 @@
 <%@ page contentType="text/html; charset=UTF-8"%>
 <%
 boardDto boardDto=(boardDto)request.getAttribute("dto");
+
 %>
 <center>
 <%@ include file="../common/top.jsp" %>
@@ -33,7 +34,7 @@ boardDto boardDto=(boardDto)request.getAttribute("dto");
 			<input type=button style="width: 60px; " value='글쓰기'/> 
 			<input type=button style="width: 60px; " value='수정'/>
 			<input type=button style="width: 60px; " value='삭제'/>
-			<input type=button style="width: 60px; " value='목록'/>
+			<input type=button style="width: 60px; " onclick="back()"  value='목록'/>
 		</td>
 	</tr>
 <%}else{
@@ -44,3 +45,11 @@ boardDto boardDto=(boardDto)request.getAttribute("dto");
 	
 </table>
 </center>
+<script>
+function back() {
+	var page=getParam('inPage');
+	var keyword=getParam('keyword');
+	page=page*1;
+	location.href='/demo4/boardPage?page='+page+'&keyword='+keyword;
+}
+</script>
