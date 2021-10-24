@@ -98,7 +98,7 @@ public class restController {
 		System.out.println("img");
 		 List<MultipartFile> multipartFiles=new ArrayList<MultipartFile>();
 	
-				multipartFiles = request.getFiles("report");
+				multipartFiles = request.getFiles("upload");
 			
 	        System.out.println(multipartFiles.toString());
 	}
