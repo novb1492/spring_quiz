@@ -57,7 +57,7 @@ public class boardService {
 		List<boardDto>dtos=new ArrayList<boardDto>();
 		//System.out.println(dtos.get(0).getCreated().toString().split("0")[0]);
 		if(getAllBoardDtos.size()==0) {
-			throw new RuntimeException("검색결과 미존재");
+			return null;
 		}
 		for(getAllBoardDto g:getAllBoardDtos) {
 			boardDto dto=new boardDto();

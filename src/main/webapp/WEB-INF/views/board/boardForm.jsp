@@ -7,6 +7,7 @@
 <%@ include file="../common/top.jsp" %>
 <%
 List<boardDto>dtos=(List<boardDto>)request.getAttribute(stringEnums.dtos.getValue());
+
 %>
 
 <table style="width: 650px; ">
@@ -37,8 +38,9 @@ List<boardDto>dtos=(List<boardDto>)request.getAttribute(stringEnums.dtos.getValu
 		<td style="width: 120px; height:40px;" align="center">20xx.xx.xx</td>
 		<td style="width: 80px; height:40px;" align="center">10</td>
 	</tr>
-	<%
-		for(boardDto b: dtos){
+
+	<%if(dtos!=null){
+		for(boardDto b:dtos){
 			%>
 			<tr>
 		<td style="width: 330px; height:40px;" align="center"><a href="/demo4/article?bid=<%=b.getId()%>"><%=b.getTitle() %></a></td>
@@ -46,8 +48,18 @@ List<boardDto>dtos=(List<boardDto>)request.getAttribute(stringEnums.dtos.getValu
 		<td style="width: 120px; height:40px;" align="center"><%=b.getCreated() %></td>
 		<td style="width: 80px; height:40px;" align="center"><%=b.getHit() %></td>
 	</tr>
-		<% }
-	%>
+		<%}
+	}else{
+		%>
+		<tr>
+		<td style="width: 330px; height:40px;" align="center">검색결과없음</td>
+		</tr>
+	<% 	}
+		%>
+	
+
+	
+	
 	<tr><td colspan=5><hr/></td></tr>
 	<tr>
 
