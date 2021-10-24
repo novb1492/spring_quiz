@@ -23,6 +23,8 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.kim.demo4.apis.kakao.kakaoService;
+import com.kim.demo4.board.boardService;
+import com.kim.demo4.board.tryArticleInsertDto;
 import com.kim.demo4.member.memService;
 import com.kim.demo4.member.tryInsertDto;
 import com.kim.demo4.member.tryLoginDto;
@@ -47,6 +49,8 @@ public class restController {
 	
 	@Autowired
 	private uploadService uploadService;
+	@Autowired
+	private boardService boardService;
 
 
 
@@ -94,9 +98,16 @@ public class restController {
        
     }
     @RequestMapping(value = "/img",method = RequestMethod.POST)
-	public JSONObject img(MultipartHttpServletRequest request) {
+	public JSONObject img(MultipartHttpServletRequest request,HttpSession session,HttpServletResponse response) {
 		System.out.println("img");
+		utillService.checkLogin(session, response);
 		return uploadService.imageUpload(request);
     }
+	@RequestMapping(value = "/board/curd/**",method = RequestMethod.POST)
+	public void tryInsertArticle( @RequestBody tryArticleInsertDto articleInsertDto ,HttpSession session,HttpServletResponse response) {
+		logger.debug("tryInsertArticle");
+		utillService.checkLogin(session, response);
+		boardService.insert(articleInsertDto, session);
+	}
 
 }

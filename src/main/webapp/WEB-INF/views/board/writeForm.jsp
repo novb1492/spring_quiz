@@ -6,13 +6,13 @@
 	<tr>
 		<td style="width: 80px; height:40px;" align="right">작성자</td>
 		<td style="width: 570px; height:40px;">
-		
+		<%=email %>
 		</td>
 	</tr>
 	<tr>
 		<td  style="width: 80px; height:40px;" align="right">제 목</td>
 		<td style="width: 570px; height:40px;">
-			<input type=text name='title' placeholder="촤대 30자입니다" style="width: 500px; "/> 
+			<input type=text id='title' placeholder="촤대 30자입니다" style="width: 500px; "/> 
 		</td>
 	</tr>
 	<tr>
@@ -20,18 +20,24 @@
 	</tr>
 	<tr>
 		<td align='center' height=40 colspan=2>
-			<input type=submit value='글쓰기' style="width: 120px; "/>
+			<input type="button" value='글쓰기' onclick="insert()" style="width: 120px; "/>
 			<input type=reset value='취소' style="width: 120px; "/>	 
 		</td>
 	</tr>
 </table>
+<input type="button" value="sds" onclick="cancleArticle()">
 </center>
- <form action="/demo4/img" method="POST" enctype="multipart/form-data">
-        <input type="file" name="report" /><br/>
-        <input type="submit" value="sss" />
-    </form>
 <script src="https://cdn.ckeditor.com/ckeditor5/29.1.0/classic/ckeditor.js"></script>
 <script>
+let editor;
+var flag=true;
+function insert() {
+	 let data=JSON.stringify({
+		 "text":editor.getData(),
+		 "title":getIdValue('title')
+	});
+	var result=requestToServer('/demo4/board/curd/insert',data);
+}
 class MyUploadAdapter {
     constructor(props) {
         // CKEditor 5's FileLoader instance.
@@ -115,8 +121,27 @@ function MyCustomUploadAdapterPlugin( editor ) {
     return new MyUploadAdapter( loader );
     };
 }
-window.onload=function(){
-	makeEditor('#editor');
-}
+	ClassicEditor
+	.create( document.querySelector('#editor'), {
+	        extraPlugins: [ MyCustomUploadAdapterPlugin ],
 
+	        // ...
+	    } )
+		.then( newEditor  => {
+	        console.log( 'Editor was initialized', newEditor  );
+	        editor = newEditor ;
+	    } )
+		.catch( error => {
+		   
+	} );
+window.onbeforeunload = function () {
+    if(true){
+        cancleArticle();
+    } 
+};
+function cancleArticle() {
+    //requestUrl='http://localhost:8080/api/cancleArticle';
+	requestToServer('/demo4/outArticle',null);
+
+}
 </script>

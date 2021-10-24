@@ -30,7 +30,6 @@ function requestPutToServer(url,data){
        success: function(response) {
            result=response;
        },
-   
    });
    console.log(result);
    console.log('통신직후');
@@ -72,18 +71,4 @@ function sendSns(phoneOrEmail,kind,detail){
 		disabledById('sendNum',false);
 	}
 }
-function makeEditor(id){
-	ClassicEditor
-.create( document.querySelector(id), {
-        extraPlugins: [ MyCustomUploadAdapterPlugin ],
 
-        // ...
-    } )
-	.then( newEditor  => {
-        console.log( 'Editor was initialized', newEditor  );
-        editor = newEditor ;
-    } )
-	.catch( error => {
-	   
-} );
-}
