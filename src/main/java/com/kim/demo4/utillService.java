@@ -2,9 +2,13 @@ package com.kim.demo4;
 
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.Random;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -85,4 +89,15 @@ public class utillService {
 			map.put("end", start+pagesize);
 			return map;
 		}
+	    public static List<String> getImgSrc(String text) {
+	    	System.out.println("getImgSrc");
+	    	List<String>array=new ArrayList<>();
+	    	Pattern nonValidPattern = Pattern.compile("<img[^>]*src=[\"']?([^>\"']+)[\"']?[^>]*>");
+			Matcher matcher = nonValidPattern.matcher(text);
+			while (matcher.find()) {
+				array.add(matcher.group(1));
+			}
+			return array;
+		}
+	    
 }

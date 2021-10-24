@@ -31,7 +31,7 @@ boardDto boardDto=(boardDto)request.getAttribute("dto");
 	</tr>
 	<tr>
 		<td colspan=2 align="right">
-			<input type=button style="width: 60px; " value='글쓰기'/> 
+			<input type=button style="width: 60px; " onclick="goWritePage()" value='글쓰기'/> 
 			<input type=button style="width: 60px; " value='수정'/>
 			<input type=button style="width: 60px; " onclick="trydelete()" value='삭제'/>
 			<input type=button style="width: 60px; " onclick="back()"  value='목록'/>
@@ -46,9 +46,16 @@ boardDto boardDto=(boardDto)request.getAttribute("dto");
 </table>
 </center>
 <script>
+function goWritePage() {
+	location.href='/demo4/writePage';
+}
 function trydelete() {
 	var bid=getParam('bid');
-	requestDelteToServer('/demo4/board/crud/delete?id='+bid);
+	var result=requestDelteToServer('/demo4/board/crud/delete?bid='+bid);
+	alert(result.message);
+	if(result.flag){
+		back();
+	}
 }
 function back() {
 	var page=getParam('inPage');

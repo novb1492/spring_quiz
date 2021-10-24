@@ -12,12 +12,13 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 import com.kim.demo4.restController;
+import com.kim.demo4.stringEnums;
 import com.kim.demo4.apis.aws.awsService;
 
 @Service
 public class uploadService {
 	private static Logger logger=LoggerFactory.getLogger(uploadService.class);
-
+	private final String bucketName=stringEnums.bucketName.getValue();
 	
 	@Autowired
 	private awsService awsService;
@@ -29,6 +30,10 @@ public class uploadService {
 			multipartFiles = request.getFiles("upload");
 		
 			System.out.println(multipartFiles.toString());
-		return awsService.uploadAws(multipartFiles.get(0), "kimsshop/images");
+		return awsService.uploadAws(multipartFiles.get(0), bucketName);
+	}
+	public void deleteImg(String img) {
+		logger.debug("deleteImg");
+		awsService.deleteFile(bucketName, img);
 	}
 }

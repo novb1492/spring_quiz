@@ -20,7 +20,9 @@ import org.springframework.ui.Model;
 
 import com.kim.demo4.stringEnums;
 import com.kim.demo4.utillService;
+import com.kim.demo4.apis.aws.awsConfig;
 import com.kim.demo4.apis.kakao.kakaoService;
+import com.kim.demo4.uploadService.uploadService;
 
 import Daos.boardDao;
 
@@ -33,14 +35,26 @@ public class boardService {
 	 private final int pageSize=2;
 	 @Autowired
 	 private boardDao boardDao;
+	 @Autowired
+	 private uploadService uploadService;
 	 
 	 public JSONObject delete(HttpServletRequest request,HttpSession session) {
 			logger.debug("delete");
-			/*boardDto boardDto=getArticle(request);
+			boardDto boardDto=getArticle(request);
 			if(!boardDto.getEmail().equals(session.getAttribute(getEmail).toString())){
 				return utillService.makeJson(false, "작성자가 일치하지 않습니다");
-			}*/
-			boardDao.deleteById(24);
+			}
+			int id=Integer.parseInt(request.getParameter("bid"));
+			boardDao.deleteById(id);
+			List<String>imgs=utillService.getImgSrc(boardDto.getText());
+			if(imgs.size()>0) {
+				logger.debug("사진이 존재하는 게시글삭제");
+				for(String s:imgs) {
+					uploadService.deleteImg(s.split("/")[5]);
+				}
+				
+			}
+		
 			return utillService.makeJson(true, "글삭제 완료");
 	}
 	 

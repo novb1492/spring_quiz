@@ -3,7 +3,8 @@ package com.kim.demo4;
 public enum stringEnums {
 	
 	email("email"),
-	dtos("dtos");
+	dtos("dtos"),
+	bucketName("kimsshop/images");
 	
     private  String value;
     
