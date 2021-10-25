@@ -27,6 +27,7 @@ import com.kim.demo4.apis.naver.naverService;
 import com.kim.demo4.board.boardService;
 import com.kim.demo4.board.tryArticleInsertDto;
 import com.kim.demo4.board.tryDeleteDto;
+import com.kim.demo4.board.tryUpdateArticleDto;
 import com.kim.demo4.member.memService;
 import com.kim.demo4.member.tryInsertDto;
 import com.kim.demo4.member.tryLoginDto;
@@ -76,9 +77,10 @@ public class restController {
 		return memService.checkSame(request);
 	}
 	@RequestMapping(value = "/user/crud/**",method = RequestMethod.PUT)
-	public JSONObject tryUpdate(@Valid @RequestBody tryUpdateMemDto updateMemDto,HttpServletRequest request,HttpServletResponse response) {
+	public JSONObject tryUpdate(@Valid @RequestBody tryUpdateArticleDto updateArticleDto,HttpSession session,HttpServletResponse response) {
 		logger.debug("tryUpdate");
-		return memService.tryUpdate(updateMemDto,request);
+		utillService.checkLogin(session, response);
+		return boardService.update(updateArticleDto, session);
 	}
 	@RequestMapping(value = "/user/**",method = RequestMethod.GET)
 	public void logout(HttpServletRequest request,HttpServletResponse response) {
@@ -124,6 +126,12 @@ public class restController {
 		logger.debug("tryDeleteArticle");
 		utillService.checkLogin(session, response);
 		return boardService.delete(request, session);
+	}
+	@RequestMapping(value = "/board/crud/**",method = RequestMethod.PUT)
+	public JSONObject tryUpdateArticle(@Valid @RequestBody tryUpdateArticleDto updateArticleDto ,HttpSession session,HttpServletResponse response) {
+		logger.debug("tryUpdateArticle");
+		utillService.checkLogin(session, response);
+		return boardService.update(updateArticleDto, session);
 	}
 	   @GetMapping("/naver/showPage")
 	    public JSONObject showNaverLoginPage(HttpServletRequest request ,HttpServletResponse response) {

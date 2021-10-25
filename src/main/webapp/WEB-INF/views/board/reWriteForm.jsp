@@ -38,12 +38,13 @@ function cancel() {
 function update() {
 	 let data=JSON.stringify({
 		 "text":editor.getData(),
-		 "title":getIdValue('title')
+		 "title":getIdValue('title'),
+		 "id":<%= boardDto.getId()%>
 	});
-	var result=requestToServer('/demo4/board/crud/insert',data);
+	var result=requestPutToServer('/demo4/board/crud/update',data);
 	alert(result.message);
 	if(result.flag){
-		location.href='/demo4/boardPage?page=1';
+		location.href='/demo4/articlePage?bid=<%=boardDto.getId()%>&inPage=1&keyword=';
 	}
 }
 class MyUploadAdapter {

@@ -36,4 +36,7 @@
 	<update id="plusHit"  parameterType="Map">
 			update board set hit=#{hit} where id=#{id}
 	</update>
+		<update id="updateArticle"  parameterType="Map">
+			update board set title=#{title},text=#{text} where id=#{id}
+	</update>
 </mapper>

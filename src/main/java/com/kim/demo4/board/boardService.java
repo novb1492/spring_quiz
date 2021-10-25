@@ -38,6 +38,25 @@ public class boardService {
 	 @Autowired
 	 private uploadService uploadService;
 	 
+	 public JSONObject update(tryUpdateArticleDto updateArticleDto,HttpSession session) {
+		System.out.println("update");
+		boardDto boardDto=findArticle(updateArticleDto.getId());
+		if(boardDto==null) {
+			return utillService.makeJson(false, "존재하지 않는 게시물입니다");
+		}
+		String email=(String)session.getAttribute("email");
+		if(!email.equals(boardDto.getEmail())) {
+			return utillService.makeJson(false, "작성자 불일치");
+		}
+		Map<String, Object>map=new HashMap<String, Object>();
+		map.put("title", boardDto.getTitle());
+		map.put("text", boardDto.getText());
+		map.put("id", boardDto.getId());
+		boardDao.updateArticle(map);
+		return utillService.makeJson(true, "글수정완료");
+		
+	 }
+	 
 	 public JSONObject delete(HttpServletRequest request,HttpSession session) {
 			logger.debug("delete");
 			int id=Integer.parseInt(request.getParameter("bid"));
