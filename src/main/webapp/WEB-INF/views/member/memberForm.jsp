@@ -50,9 +50,9 @@
 	<tr>
 		<td align='right' width=120>성 별</td>
 		<td colspan="3">
-			<input type=radio id='gender' value='n' checked="checked"/>선택 안함
-			<input type=radio id='gender' value='m' />남자
-			<input type=radio id='gender' value='w' />여자 
+			<input type=radio id='gender' name="gender" value='n' checked="checked"/>선택 안함
+			<input type=radio id='gender' name="gender" value='m' />남자
+			<input type=radio id='gender' name="gender" value='w' />여자 
 		</td>
 	</tr>
 	
@@ -103,7 +103,7 @@ function insert() {
 			var postcode=getIdValue('zipcode');
 				var address=getIdValue('addr1');
 					var detailAddress=getIdValue('addr2');
-						var gender='남자';
+						var gender=getRadioValue('gender');
 						var name=getIdValue('name');
 		 let data=JSON.stringify({
 				 "email":email,

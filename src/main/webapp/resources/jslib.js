@@ -96,4 +96,12 @@ function sendSns(phoneOrEmail,kind,detail){
     }
     return sval;
 }
+function getRadioValue(name){
+	 var obj_length = document.getElementsByName(name).length;
+        for (var i=0; i<obj_length; i++) {
+            if (document.getElementsByName(name)[i].checked == true) {
+               return document.getElementsByName(name)[i].value;
+            }
+        }
+}
 
