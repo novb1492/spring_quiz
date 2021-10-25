@@ -24,6 +24,29 @@ public class utillService {
 	private static Logger logger=LoggerFactory.getLogger(utillService.class);
 	 private static  String getEmail=stringEnums.email.getValue();
 	 
+	 public static List<String> getDeleteImgs(List<String>originImage,List<String>dtoImages) {
+		System.out.println("getDeleteImgs");
+		List<String>array=new ArrayList<String>();
+		int originImageSize=originImage.size();
+		int dtoImagesSize=dtoImages.size();
+		for(int i=0;i<originImageSize;i++) {
+			for(int ii=0;ii<dtoImagesSize;ii++) {
+				String s=originImage.get(i);
+				String n=dtoImages.get(ii);
+				if(s.equals(n)) {
+					System.out.println("이전 사진 존재");
+					break;
+				}else if(!s.equals(n)&&ii==dtoImagesSize-1) {
+					System.out.println("삭제된 사진 발견");
+					array.add(s.split("/")[5]);
+				}
+			}
+		}
+			
+		return 	array;
+			
+		
+	}
 	public static JSONObject makeJson(boolean flag,String message) {
 		logger.debug("makeJson");
 		JSONObject response=new JSONObject();

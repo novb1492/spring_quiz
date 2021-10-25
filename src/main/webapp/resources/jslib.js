@@ -18,6 +18,24 @@ function requestToServer(url,data){
    return result;
    
 }
+function requestToServer2(url,data){
+   $.ajax({
+       type: 'POST',
+       url: url,
+       dataType : "json",
+       data: data,
+       contentType: "application/json; charset:UTF-8",
+       xhrFields: {withCredentials: true},
+       success: function(response) {
+           result=response;
+       },
+   
+   });
+   console.log(result);
+   console.log('통신직후');
+   return result;
+   
+}
 function requestPutToServer(url,data){
    $.ajax({
        type: 'PUT',

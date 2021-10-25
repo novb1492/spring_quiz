@@ -143,5 +143,11 @@ public class restController {
 	    	logger.info("naverLoginCallback restcontroller");
 	        naverService.tryNaverLogin(request,response);
 	    }
+	  @RequestMapping("/deleteimg")
+	    public void deleteimg(@RequestBody  JSONObject jsonObject,HttpSession session ,HttpServletResponse response) {
+	    	System.out.println("deleteimg restcontroller");
+	    	utillService.checkLogin(session, response);
+	    	boardService.deleteAll(jsonObject);
+	    }
 
 }

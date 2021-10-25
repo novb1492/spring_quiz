@@ -34,6 +34,7 @@ function cancel() {
 	location.href='/demo4/boardPage?page=1'
 }
 function insert() {
+	flag=false;
 	 let data=JSON.stringify({
 		 "text":editor.getData(),
 		 "title":getIdValue('title')
@@ -42,6 +43,8 @@ function insert() {
 	alert(result.message);
 	if(result.flag){
 		location.href='/demo4/boardPage?page=1';
+	}else{
+		flag=true;
 	}
 }
 class MyUploadAdapter {
@@ -140,14 +143,19 @@ function MyCustomUploadAdapterPlugin( editor ) {
 		.catch( error => {
 		   
 	} );
-window.onbeforeunload = function () {
-    if(true){
-        cancleArticle();
-    } 
-};
+	window.onbeforeunload = function(e) {
+		if(flag){
+			cancleArticle();
+		}
+	};
 function cancleArticle() {
-    //requestUrl='http://localhost:8080/api/cancleArticle';
-	requestToServer('/demo4/outArticle',null);
+	console.log('a');
+	 let data=JSON.stringify({
+		 "text":editor.getData(),
+		 "detail":'insert'
+	});
+	 console.log(data);
+	 requestToServer2('/demo4/deleteimg',data);
 
 }
 </script>
