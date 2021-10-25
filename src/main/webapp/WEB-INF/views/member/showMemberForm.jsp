@@ -62,7 +62,13 @@ function changeAddress() {
 	       		"postcode":postcode,
 	       			"address":address,
 	       				"detailAddress":detailAddress,
-	       				"detail":"address"
+	       				"detail":"address",
+	       				<%if(dto.getRole().equals("admin")) 
+		       				{%>
+		       				"email":'<%=dto.getEmail() %>'
+		       			<%	}
+	       				
+	       				%>
 	});
 	 var reuslt=requestPutToServer('/demo4/user/crud/change?detail=address',data);
 	 console.log(result);

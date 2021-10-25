@@ -44,6 +44,9 @@ public class memService {
 	public JSONObject updateAddress(tryUpdateMemDto updateMemDto,HttpServletRequest request) {
 		System.out.println("updateAddress");
 		Map<String, Object>map=utillService.getEmailAndRole(request);
+		if(map.get("role").equals("admin")) {
+			map.put("email", updateMemDto.getEmail());
+		}
 		String postcode=updateMemDto.getPostcode();
 		String address=updateMemDto.getAddress();
 		String detailAddress=updateMemDto.getDetailAddress();
