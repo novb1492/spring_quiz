@@ -75,6 +75,7 @@ public class kakaoLoginService {
                         .created(Timestamp.valueOf(LocalDateTime.now()))
                         .gender("남")
                         .provider("kakao")
+                        .role("user")
                         .build();
                         return vo;
     }

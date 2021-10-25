@@ -16,4 +16,5 @@ public class getMembersDto {
 	private String provider;
 	private int totalCount;
 	private int id;
+	private String role;
 }

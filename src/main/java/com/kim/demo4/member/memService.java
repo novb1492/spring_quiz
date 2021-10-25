@@ -162,6 +162,7 @@ public class memService {
 									.gender(insertDto.getGender())
 									.pwd(new BCryptPasswordEncoder().encode(insertDto.getPwd()))
 									.provider("home")
+									.role("user")
 									.build();
 						
 			memberDao.insert(dto);

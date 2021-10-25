@@ -2,7 +2,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="Daos.memberDao">
 	<insert id="insert" parameterType="com.kim.demo4.member.memberDto">
-		insert into member values(#{pwd},#{email},#{address},#{gender},#{name},#{provider},memberid.NEXTVAL,#{created})
+		insert into member values(#{pwd},#{email},#{address},#{gender},#{name},#{provider},memberid.NEXTVAL,#{created},#{role})
 	</insert>
 	<select id="countByEmail" resultType="_int">
 		SELECT count(*) FROM member where email=#{email}
@@ -27,6 +27,7 @@
 		<result property="provider" column="provider"/>
 		<result property="id" column="id"/>
 		<result property="created" column="created"/>
+		<result property="role" column="role"/>
 		<result property="totalCount" column="totalcount"/>
 	</resultMap>
 	<select id="selectAll" parameterType="Map"  resultMap="getMembersDto" >

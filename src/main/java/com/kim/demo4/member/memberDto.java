@@ -25,6 +25,7 @@ public class memberDto {
 	private Timestamp created;
 	private String provider;
 	private int id;
+	private String role;
 
 
 }

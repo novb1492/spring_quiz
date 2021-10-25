@@ -55,6 +55,7 @@ public class naverLoginService {
 	                        .created(Timestamp.valueOf(LocalDateTime.now()))
 	                        .gender("남")
 	                        .provider("kakao")
+	                        .role("user")
 	                        .build();
 	        LOGGER.info("통과");                
 	        return vo;
