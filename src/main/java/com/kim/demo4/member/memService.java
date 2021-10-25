@@ -53,6 +53,7 @@ public class memService {
 			memberDto.setCreated(g.getCreated());
 			memberDto.setEmail(g.getEmail());
 			memberDto.setGender(g.getGender());
+			memberDto.setRole(g.getRole());
 			memberDtos.add(memberDto);
 		}
 		model.addAttribute("dtos", memberDtos);
@@ -65,7 +66,8 @@ public class memService {
 		if(keyword.isBlank()||keyword==null||keyword.equals("null")) {
 			return memberDao.selectAll(map);
 		}
-		return memberDao.selectAll(map);
+		map.put("keyword", keyword);
+		return memberDao.selectAllByKeyword(map);
 		
 	}
 	public JSONObject insert(tryInsertDto insertDto,HttpServletRequest request) {

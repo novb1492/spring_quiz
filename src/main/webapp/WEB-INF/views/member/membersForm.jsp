@@ -33,7 +33,7 @@ if(keyword==null){
 			%>
 			<tr>
 			<%
-				if(e.equals(m.getEmail())){
+				if(e.equals(m.getEmail())||m.getRole().equals("admin")){
 					%>
 					<td style="width: 330px; height:40px;" align="center"><a href="/demo4/articlePage?bid=<%=m.getId()%>&inPage=<%=nowPage%>&keyword=<%=keyword%>"><%=m.getEmail()%></a></td>
 				<%}else{	
