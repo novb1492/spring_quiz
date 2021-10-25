@@ -8,7 +8,7 @@
 <%@ include file="../common/top.jsp" %>
 <%
 List<memberDto>dtos=(List<memberDto>)request.getAttribute(stringEnums.dtos.getValue());
-String e=session.getAttribute("email").toString();
+
 int nowPage=(int)request.getAttribute("page");
 int totalPage=(int)request.getAttribute("totalPage");
 String keyword=request.getParameter("keyword");
@@ -33,7 +33,7 @@ if(keyword==null){
 			%>
 			<tr>
 			<%
-				if(e.equals(m.getEmail())||m.getRole().equals("admin")){
+				if((flag&&email.equals(m.getEmail()))||m.getRole().equals("admin")){
 					%>
 					<td style="width: 330px; height:40px;" align="center"><a href="/demo4/showMemberPage?detail=one&email=<%=m.getEmail()%>&inPage=<%=nowPage%>&keyword=<%=keyword%>"><%=m.getEmail()%></a></td>
 				<%}else{	

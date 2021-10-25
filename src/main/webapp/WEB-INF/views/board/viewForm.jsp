@@ -2,13 +2,6 @@
 <%@ page contentType="text/html; charset=UTF-8"%>
 <%
 boardDto boardDto=(boardDto)request.getAttribute("dto");
-String e="no";
-try{
-	 e=session.getAttribute("email").toString();
-}catch(Exception e2){
-	e="no";
-}
-
 %>
 <center>
 <%@ include file="../common/top.jsp" %>
@@ -39,7 +32,7 @@ try{
 		<td colspan=2 align="right">
 			<input type=button style="width: 60px; " onclick="goWritePage()" value='글쓰기'/> 
 			<%
-			if(e.equals(boardDto.getEmail())){
+			if(flag&&email.equals(boardDto.getEmail())){
 				%>
 				<input type=button style="width: 60px; " value='수정'/>
 			<input type=button style="width: 60px; " onclick="trydelete()" value='삭제'/>
