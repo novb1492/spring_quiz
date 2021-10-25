@@ -32,6 +32,20 @@ public class memService {
 	private static Logger logger=LoggerFactory.getLogger(memService.class);
 	private final int pagesize=2;
 	
+	public JSONObject tryUpdate(tryUpdateMemDto updateMemDto,HttpServletRequest request) {
+		System.out.println("tryUpdate");
+		String detail=updateMemDto.getDetail();
+		if(detail.equals("address")) {
+			return updateAddress(updateMemDto, request);
+		}else {
+			throw new RuntimeException("잘못된 디테일값입니다");
+		}
+	}
+	public JSONObject updateAddress(tryUpdateMemDto updateMemDto,HttpServletRequest request) {
+		System.out.println("updateAddress");
+		
+		return null;
+	}
 	public void getMemebersOrMember(HttpServletRequest request,Model model) {
 		System.out.println("getMemebersOrMember");
 		String detail=request.getParameter("detail");

@@ -10,6 +10,7 @@ import java.util.Random;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
@@ -98,6 +99,14 @@ public class utillService {
 				array.add(matcher.group(1));
 			}
 			return array;
+		}
+	    public static Map<String, Object> getEmailAndRole(HttpServletRequest request) {
+			System.out.println("getEmailAndRole");
+			Map<String, Object>map=new HashMap<String, Object>();
+			HttpSession session=request.getSession();
+			map.put("email", session.getAttribute("email"));
+			map.put("role", session.getAttribute("role"));
+			return map;
 		}
 	    
 }

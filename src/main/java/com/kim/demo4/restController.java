@@ -30,6 +30,7 @@ import com.kim.demo4.board.tryDeleteDto;
 import com.kim.demo4.member.memService;
 import com.kim.demo4.member.tryInsertDto;
 import com.kim.demo4.member.tryLoginDto;
+import com.kim.demo4.member.tryUpdateMemDto;
 import com.kim.demo4.sns.MailService;
 import com.kim.demo4.sns.tryCheckNumDto;
 import com.kim.demo4.sns.trySendDto;
@@ -73,6 +74,11 @@ public class restController {
 	public JSONObject checkSame(HttpServletRequest request,HttpServletResponse response) {
 		logger.debug("checkSame");
 		return memService.checkSame(request);
+	}
+	@RequestMapping(value = "/user/crud/**",method = RequestMethod.PUT)
+	public JSONObject tryUpdate(@Valid @RequestBody tryUpdateMemDto updateMemDto,HttpServletRequest request,HttpServletResponse response) {
+		logger.debug("tryUpdate");
+		return memService.tryUpdate(updateMemDto,request);
 	}
 	@RequestMapping(value = "/user/**",method = RequestMethod.GET)
 	public void logout(HttpServletRequest request,HttpServletResponse response) {
