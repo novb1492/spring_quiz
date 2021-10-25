@@ -34,7 +34,7 @@ boardDto boardDto=(boardDto)request.getAttribute("dto");
 			<%
 			if(flag&&email.equals(boardDto.getEmail())){
 				%>
-				<input type=button style="width: 60px; " value='수정'/>
+				<input type=button style="width: 60px; " onclick="goUpdate()" value='수정'/>
 			<input type=button style="width: 60px; " onclick="trydelete()" value='삭제'/>
 			<%}%>
 			<input type=button style="width: 60px; " onclick="back()"  value='목록'/>
@@ -50,6 +50,9 @@ boardDto boardDto=(boardDto)request.getAttribute("dto");
 </table>
 </center>
 <script>
+function goUpdate() {
+	location.href='/demo4/reWritePage?bid=<%=boardDto.getId()%>';
+}
 function goWritePage() {
 	location.href='/demo4/writePage';
 }

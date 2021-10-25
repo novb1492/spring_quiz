@@ -98,5 +98,11 @@ public class HomeController {
 		memService.getMemebersOrMember(request, model);
 		return "/member/showMemberForm";
 	}
+	@GetMapping("/reWritePage")
+	public String reWritePage(HttpServletRequest request,HttpSession session,HttpServletResponse response,Model model) {
+		utillService.checkLogin(session, response);
+		model.addAttribute("dto", boardService.findArticle(Integer.parseInt(request.getParameter("bid"))));
+		return "/board/reWriteForm";
+	}
 
 }

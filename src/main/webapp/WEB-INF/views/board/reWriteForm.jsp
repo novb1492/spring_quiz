@@ -1,5 +1,6 @@
+<%@page import="com.kim.demo4.board.boardDto"%>
 <%@ page contentType="text/html; charset=UTF-8"%>
-
+<%boardDto boardDto=(boardDto)request.getAttribute("dto"); %>
 <center>
 <%@ include file="../common/top.jsp" %>
 <table style="width: 650px; ">
@@ -12,7 +13,7 @@
 	<tr>
 		<td  style="width: 80px; height:40px;" align="right">제 목</td>
 		<td style="width: 570px; height:40px;">
-			<input type=text id='title' placeholder="촤대 30자입니다" style="width: 500px; "/> 
+			<input type=text id='title' placeholder="촤대 30자입니다" style="width: 500px; " value="<%= boardDto.getTitle()%>"/> 
 		</td>
 	</tr>
 	<tr>
@@ -20,8 +21,8 @@
 	</tr>
 	<tr>
 		<td align='center' height=40 colspan=2>
-			<input type="button" value='글쓰기' onclick="insert()" style="width: 120px; "/>
-			<input type=reset value='취소' style="width: 120px; "/>	 
+			<input type="button" value='수정' onclick="update()" style="width: 120px; "/>
+			<input type=reset value='취소' onclick="cancel()" style="width: 120px; "/>	 
 		</td>
 	</tr>
 </table>
@@ -31,7 +32,10 @@
 <script>
 let editor;
 var flag=true;
-function insert() {
+function cancel() {
+	location.href='/demo4/boardPage?page=1'
+}
+function update() {
 	 let data=JSON.stringify({
 		 "text":editor.getData(),
 		 "title":getIdValue('title')
@@ -125,6 +129,8 @@ function MyCustomUploadAdapterPlugin( editor ) {
     return new MyUploadAdapter( loader );
     };
 }
+
+window.onload = function () {
 	ClassicEditor
 	.create( document.querySelector('#editor'), {
 	        extraPlugins: [ MyCustomUploadAdapterPlugin ],
@@ -134,14 +140,11 @@ function MyCustomUploadAdapterPlugin( editor ) {
 		.then( newEditor  => {
 	        console.log( 'Editor was initialized', newEditor  );
 	        editor = newEditor ;
+	        editor.setData('<%=boardDto.getText()%>');
 	    } )
 		.catch( error => {
 		   
 	} );
-window.onbeforeunload = function () {
-    if(true){
-        cancleArticle();
-    } 
 };
 function cancleArticle() {
     //requestUrl='http://localhost:8080/api/cancleArticle';

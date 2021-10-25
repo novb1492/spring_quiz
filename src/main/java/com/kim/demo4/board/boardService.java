@@ -127,7 +127,7 @@ public class boardService {
 		boardDao.plusHit(map);
 		return boardDto;
 	}
-	private boardDto findArticle(int id) {
+	public boardDto findArticle(int id) {
 		logger.debug("getArticle");
 		boardDto boardDto=boardDao.findById(id);
 		return boardDto;

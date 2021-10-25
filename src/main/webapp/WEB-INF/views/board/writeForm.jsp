@@ -21,16 +21,18 @@
 	<tr>
 		<td align='center' height=40 colspan=2>
 			<input type="button" value='글쓰기' onclick="insert()" style="width: 120px; "/>
-			<input type=reset value='취소' style="width: 120px; "/>	 
+			<input type=reset value='취소' onclick="cancel()" style="width: 120px; "/>	 
 		</td>
 	</tr>
 </table>
-<input type="button" value="sds" onclick="cancleArticle()">
 </center>
 <script src="https://cdn.ckeditor.com/ckeditor5/29.1.0/classic/ckeditor.js"></script>
 <script>
 let editor;
 var flag=true;
+function cancel() {
+	location.href='/demo4/boardPage?page=1'
+}
 function insert() {
 	 let data=JSON.stringify({
 		 "text":editor.getData(),
