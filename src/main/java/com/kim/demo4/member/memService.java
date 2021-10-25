@@ -31,7 +31,18 @@ public class memService {
 	private static Logger logger=LoggerFactory.getLogger(memService.class);
 	private final int pagesize=2;
 	
-	public void getMembers(HttpServletRequest request,Model model) {
+	public void getMemebersOrMember(HttpServletRequest request,Model model) {
+		System.out.println("getMemebersOrMember");
+		String detail=request.getParameter("detail");
+		if(detail.equals("all")) {
+			getMembers(request, model);
+		}else if(detail.equals("one")) {
+			
+		}else {
+			throw new RuntimeException("잘못된 디테일값입니다");
+		}
+	}
+	private void getMembers(HttpServletRequest request,Model model) {
 		System.out.println("getMembers");
 		int page=Integer.parseInt(request.getParameter("page"));
 		String keyword=request.getParameter("keyword");

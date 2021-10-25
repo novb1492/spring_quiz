@@ -30,7 +30,7 @@ a:active{color:#ff00cc; text-decoration:underline; }
 		<td><%=email %></td>
 		<td><a href="/demo4/user/logout">로그아웃</a></td>
 		<td><a href="/demo4/boardPage?page=1">게시판</a></td>
-		<td><a href="/demo4/membersPage?page=1&keyword=">members</a></td>
+		<td><a href="/demo4/membersPage?detail=all&page=1&keyword=">members</a></td>
 		<% }else{
 			%>
 			<td><a href="/demo4/loginPage">로그인</a></td>

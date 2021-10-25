@@ -87,9 +87,15 @@ public class HomeController {
 		return "/board/viewForm";
 	}
 	@GetMapping("/membersPage")
-	public String showArticlePage(HttpServletRequest request,HttpSession session,HttpServletResponse response,Model model) {
+	public String showMembersPage(HttpServletRequest request,HttpSession session,HttpServletResponse response,Model model) {
 		utillService.checkLogin(session, response);
-		memService.getMembers(request, model);
+		memService.getMemebersOrMember(request, model);
+		return "/member/membersForm";
+	}
+	@GetMapping("/memberPage")
+	public String showMemberPage(HttpServletRequest request,HttpSession session,HttpServletResponse response,Model model) {
+		utillService.checkLogin(session, response);
+		memService.getMemebersOrMember(request, model);
 		return "/member/membersForm";
 	}
 

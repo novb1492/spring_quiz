@@ -35,7 +35,7 @@ if(keyword==null){
 			<%
 				if(e.equals(m.getEmail())||m.getRole().equals("admin")){
 					%>
-					<td style="width: 330px; height:40px;" align="center"><a href="/demo4/articlePage?bid=<%=m.getId()%>&inPage=<%=nowPage%>&keyword=<%=keyword%>"><%=m.getEmail()%></a></td>
+					<td style="width: 330px; height:40px;" align="center"><a href="/demo4/showMemberPage?detail=one&id=<%=m.getId()%>&inPage=<%=nowPage%>&keyword=<%=keyword%>"><%=m.getEmail()%></a></td>
 				<%}else{	
 				%>	
 				<td style="width: 330px; height:40px;" align="center"><%=m.getEmail()%></td>
@@ -87,11 +87,11 @@ function movePage(num) {
 	var page=getParam('page');
 	var keyword=getParam('keyword');
 	page=page*1;
-	location.href='/demo4/membersPage?page='+(page+num)+'&keyword='+keyword;
+	location.href='/demo4/membersPage?detail=all&page='+(page+num)+'&keyword='+keyword;
 }
 function search() {
 	var email=getIdValue('search');
-	location.href='/demo4/membersPage?page=1&keyword='+email;
+	location.href='/demo4/membersPage?detail=all&page=1&keyword='+email;
 }
 
 </script>
