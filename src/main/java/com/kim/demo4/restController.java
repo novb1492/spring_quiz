@@ -77,10 +77,9 @@ public class restController {
 		return memService.checkSame(request);
 	}
 	@RequestMapping(value = "/user/crud/**",method = RequestMethod.PUT)
-	public JSONObject tryUpdate(@Valid @RequestBody tryUpdateArticleDto updateArticleDto,HttpSession session,HttpServletResponse response) {
+	public JSONObject tryUpdate(@Valid @RequestBody tryUpdateMemDto updateMemDto,HttpServletRequest request,HttpServletResponse response) {
 		logger.debug("tryUpdate");
-		utillService.checkLogin(session, response);
-		return boardService.update(updateArticleDto, session);
+		return memService.tryUpdate(updateMemDto,request);
 	}
 	@RequestMapping(value = "/user/**",method = RequestMethod.GET)
 	public void logout(HttpServletRequest request,HttpServletResponse response) {
