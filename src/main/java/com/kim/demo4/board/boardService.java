@@ -49,8 +49,8 @@ public class boardService {
 			return utillService.makeJson(false, "작성자 불일치");
 		}
 		Map<String, Object>map=new HashMap<String, Object>();
-		map.put("title", boardDto.getTitle());
-		map.put("text", boardDto.getText());
+		map.put("title", updateArticleDto.getTitle());
+		map.put("text",  updateArticleDto.getText());
 		map.put("id", boardDto.getId());
 		boardDao.updateArticle(map);
 		return utillService.makeJson(true, "글수정완료");
