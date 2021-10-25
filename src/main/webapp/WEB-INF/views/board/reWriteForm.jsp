@@ -147,9 +147,20 @@ window.onload = function () {
 		   
 	} );
 };
+window.onbeforeunload = function(e) {
+	if(flag){
+		cancleArticle();
+	}
+};
 function cancleArticle() {
-    //requestUrl='http://localhost:8080/api/cancleArticle';
-	requestToServer('/demo4/outArticle',null);
+console.log('a');
+ let data=JSON.stringify({
+	 "originText":'<%=boardDto.getText()%>',
+	 "text":editor.getData(),
+	 "detail":'update'
+});
+ console.log(data);
+ requestToServer2('/demo4/deleteimg',data);
 
 }
 </script>

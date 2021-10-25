@@ -47,7 +47,14 @@ public class boardService {
 				}
 			}
 		}else if(jsonObject.get("detail").equals("update")) {
-			
+			List<String>originImage=utillService.getImgSrc(jsonObject.get("originText").toString());
+			List<String>dtoImages=utillService.getImgSrc(jsonObject.get("text").toString());
+			if(!originImage.isEmpty()) {
+				List<String>array=utillService.getDeleteImgs(originImage, dtoImages);
+				for(String s:array) {
+					uploadService.deleteImg(s);
+				}
+			}
 		}
 	}
 	 public JSONObject update(tryUpdateArticleDto updateArticleDto,HttpSession session) {
