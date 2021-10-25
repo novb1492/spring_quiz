@@ -69,7 +69,7 @@ public class kakaoLoginService {
         LOGGER.info("mapToVo");
         LinkedHashMap<String,Object>profile=(LinkedHashMap<String, Object>) userInfor.get("profile");
         memberDto vo=memberDto.builder()
-                        .address("테스트 주소 안줌")
+        				.address("주소,정보,없음")
                         .email((String)userInfor.get("email"))
                         .name((String)profile.get("nickname"))
                         .created(Timestamp.valueOf(LocalDateTime.now()))

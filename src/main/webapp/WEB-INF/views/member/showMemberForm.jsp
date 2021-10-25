@@ -8,6 +8,7 @@
 <%@ include file="../common/top.jsp" %>
 <%
 memberDto dto=(memberDto)request.getAttribute("dto");
+
 %>
 
 <table style="width: 650px;">
@@ -27,17 +28,17 @@ memberDto dto=(memberDto)request.getAttribute("dto");
 		<td style="width: 80px; height:20px;" align="center"><hr/></td>
 	</tr>
 	<tr>
-		<td style="width: 330px; height:40px;" align="center">자주 이용해 주세요</td>
-		<td style="width: 80px; height:40px;" align="center">관리자</td>
-		<td style="width: 120px; height:40px;" align="center">20xx.xx.xx</td>
-		<td style="width: 80px; height:40px;" align="center">1</td>
+			<%
+		if(dto!=null){
+			%>
+		<td style="width: 330px; height:40px;" align="center"><%=dto.getEmail() %></td>
+		<td style="width: 80px; height:40px;" align="center"><%=dto.getCreated() %></td>
+		<td style="width: 120px; height:40px;" align="center"><%=dto.getAddress() %></td>
+		<td style="width: 80px; height:40px;" align="center"><%=dto.getGender() %></td>
+		<%}
+		%>
 	</tr>
-	<tr>
-		<td style="width: 330px; height:40px;" align="center">게시판 확인</td>
-		<td style="width: 80px; height:40px;" align="center">관리자</td>
-		<td style="width: 120px; height:40px;" align="center">20xx.xx.xx</td>
-		<td style="width: 80px; height:40px;" align="center">10</td>
-	</tr>
+
 
 
 		

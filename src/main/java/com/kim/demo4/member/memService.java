@@ -49,14 +49,15 @@ public class memService {
 		HttpSession session=request.getSession();
 		String role=session.getAttribute("role").toString();
 		String loginEmail=session.getAttribute("email").toString();
+		if(memberDto==null) {
+			model.addAttribute("dto", null);
+			return;
+		}
 		if(!loginEmail.equals(memberDto.getEmail())&&!role.equals("admin")) {
 			model.addAttribute("dto", null);
 			return;
 		}
-		if(memberDto.getId()==0) {
-			model.addAttribute("dto", null);
-			return;
-		}
+		
 		model.addAttribute("dto", memberDto);
 	}
 	private void getMembers(HttpServletRequest request,Model model) {
