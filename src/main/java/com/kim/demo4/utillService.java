@@ -78,10 +78,10 @@ public class utillService {
 	        logger.debug(totalpage+" 전체 페이지");
 	        return totalpage;
 	}
-	    public static Map<String, Integer> getStart(int nowPage,int pagesize) {
+	    public static Map<String, Object> getStart(int nowPage,int pagesize) {
 	    	logger.debug("getPagingStartEnd");
 	    	int start=0;
-	    	Map<String, Integer>map=new HashMap<>();
+	    	Map<String, Object>map=new HashMap<>();
 	    	if(nowPage!=1) {
 	    		start=(nowPage-1)*pagesize+1;
 			}

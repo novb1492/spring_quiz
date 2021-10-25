@@ -80,7 +80,7 @@ public class boardService {
 		System.out.println("fds");
 		int page=Integer.parseInt(request.getParameter("page"));
 		String keyword=request.getParameter("keyword");
-		Map<String, Integer>map=utillService.getStart(page, pageSize);
+		Map<String, Object>map=utillService.getStart(page, pageSize);
 		List<getAllBoardDto>getAllBoardDtos=getGetAllBoardDtos(map, keyword);
 		List<boardDto>dtos=new ArrayList<boardDto>();
 		//System.out.println(dtos.get(0).getCreated().toString().split("0")[0]);
@@ -108,11 +108,8 @@ public class boardService {
 		model.addAttribute(dtostext, dtos);
 		
 	}
-	 private List<getAllBoardDto> getGetAllBoardDtos(Map<String, Integer>map2,String keyword) {
+	 private List<getAllBoardDto> getGetAllBoardDtos(Map<String, Object>map,String keyword) {
 		logger.debug("getGetAllBoardDtos");
-		Map<String, Object>map=new HashMap<String, Object>();
-		map.put("start",map2.get("start"));
-		map.put("pagesize" ,map2.get("end"));
 		if(keyword==null||keyword.isBlank()) {
 			return boardDao.selectAll(map);
 		}

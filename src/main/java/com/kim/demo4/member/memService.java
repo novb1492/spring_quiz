@@ -4,6 +4,7 @@ import java.sql.Timestamp;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 
 import javax.servlet.http.HttpServletRequest;
@@ -14,6 +15,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.ui.Model;
 
 import com.kim.demo4.utillService;
 
@@ -25,8 +27,47 @@ import Daos.memberDao;
 public class memService {
 	@Autowired
 	private memberDao memberDao;
-	private static Logger logger=LoggerFactory.getLogger(memService.class);
 	
+	private static Logger logger=LoggerFactory.getLogger(memService.class);
+	private final int pagesize=2;
+	
+	public void getMembers(HttpServletRequest request,Model model) {
+		System.out.println("getMembers");
+		int page=Integer.parseInt(request.getParameter("page"));
+		String keyword=request.getParameter("keyword");
+		Map<String, Object>map=utillService.getStart(page, pagesize);
+		List<getMembersDto>getMembersDtos=getDtos(map, keyword);
+		if(getMembersDtos.size()==0) {
+			model.addAttribute("page", 1);
+			model.addAttribute("totalPage", 1);
+			model.addAttribute("dtos", null);
+			return;
+		}
+		int totalPage=utillService.getTotalPage(getMembersDtos.get(0).getTotalCount(), pagesize);
+		if(page>totalPage) {
+			throw  new RuntimeException("마지막페이지입니다");
+		}
+		List<memberDto>memberDtos=new ArrayList<memberDto>();
+		for(getMembersDto g: getMembersDtos) {
+			memberDto memberDto=new memberDto();
+			memberDto.setCreated(g.getCreated());
+			memberDto.setEmail(g.getEmail());
+			memberDto.setGender(g.getGender());
+			memberDtos.add(memberDto);
+		}
+		model.addAttribute("dtos", memberDtos);
+		model.addAttribute("page", page);
+		model.addAttribute("totalPage", totalPage);
+		
+	}
+	private List<getMembersDto> getDtos(Map<String, Object>map,String keyword) {
+		System.out.println("getDtos");
+		if(keyword.isBlank()||keyword==null||keyword.equals("null")) {
+			return memberDao.selectAll(map);
+		}
+		return memberDao.selectAll(map);
+		
+	}
 	public JSONObject insert(tryInsertDto insertDto,HttpServletRequest request) {
 		logger.debug("insert");
 		String message="알수 없는 오류 발생";

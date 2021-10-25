@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.kim.demo4.board.boardService;
+import com.kim.demo4.member.memService;
 
 
 
@@ -33,6 +34,8 @@ public class HomeController {
 	
 	@Autowired
 	private boardService boardService;
+	@Autowired
+	private memService memService;
 
 
 	private static final Logger logger = LoggerFactory.getLogger(HomeController.class);
@@ -82,6 +85,12 @@ public class HomeController {
 	public String showArticlePage(HttpServletRequest request,HttpServletResponse response,Model model) {
 		model.addAttribute("dto", boardService.getArticle(request));
 		return "/board/viewForm";
+	}
+	@GetMapping("/membersPage")
+	public String showArticlePage(HttpServletRequest request,HttpSession session,HttpServletResponse response,Model model) {
+		utillService.checkLogin(session, response);
+		memService.getMembers(request, model);
+		return "/member/membersForm";
 	}
 
 }

@@ -2,7 +2,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="Daos.memberDao">
 	<insert id="insert" parameterType="com.kim.demo4.member.memberDto">
-		insert into member values(#{pwd},#{email},#{address},#{gender},#{name},#{provider})
+		insert into member values(#{pwd},#{email},#{address},#{gender},#{name},#{provider},memberid.NEXTVAL,#{created})
 	</insert>
 	<select id="countByEmail" resultType="_int">
 		SELECT count(*) FROM member where email=#{email}
@@ -17,5 +17,19 @@
 	</resultMap>
 	<select id="findByEmail" resultMap="member">
 		select email,pwd from member where email=#{email}
+	</select>
+		<resultMap type="com.kim.demo4.member.getMembersDto" id="getMembersDto">
+		<result property="id" column="id"/>
+		<result property="email" column="email"/>
+		<result property="address" column="address"/>
+		<result property="gender" column="gender"/>
+		<result property="name" column="name"/>
+		<result property="provider" column="provider"/>
+		<result property="id" column="id"/>
+		<result property="created" column="created"/>
+		<result property="totalCount" column="totalcount"/>
+	</resultMap>
+	<select id="selectAll" parameterType="Map"  resultMap="getMembersDto" >
+		select b.*,(select count(*) from member)totalcount from(select ROW_NUMBER() OVER (ORDER BY id desc)  num, a.* from member a ) b where num between #{start} and #{end}
 	</select>
 </mapper>
