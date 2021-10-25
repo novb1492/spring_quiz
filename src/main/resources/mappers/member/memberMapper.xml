@@ -39,4 +39,7 @@
 	<select id="selectAllByKeyword" parameterType="Map" resultMap="getMembersDto" >
 		select b.*,(select count(*) from member where email like '%'||#{keyword}||'%')totalcount from(select ROW_NUMBER() OVER (ORDER BY id desc)  num, a.* from member a ) b where email like '%'||#{keyword}||'%' and num between #{start} and #{end}
 	</select>
+	<update id="updateAddress"  parameterType="Map" >
+		update member set address=#{address} where email=#{email}
+	</update>
 </mapper>

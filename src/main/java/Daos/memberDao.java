@@ -18,4 +18,5 @@ public interface memberDao {
 	public List<getMembersDto>selectAll(Map<String, Object>map);
 	public List<getMembersDto>selectAllByKeyword(Map<String, Object>map);
 	public memberDto findById(int id);
+	public int updateAddress(Map<String, Object>map);
 }

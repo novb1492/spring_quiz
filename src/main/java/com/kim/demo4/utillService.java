@@ -108,5 +108,12 @@ public class utillService {
 			map.put("role", session.getAttribute("role"));
 			return map;
 		}
+	    public static boolean checkNull(String obString) {
+			System.out.println("checkNull");
+			if(obString==null||obString.isBlank()||obString.equals("null")) {
+				return true;
+			}
+			return false;
+		}
 	    
 }

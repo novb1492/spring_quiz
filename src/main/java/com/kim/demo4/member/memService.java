@@ -43,8 +43,18 @@ public class memService {
 	}
 	public JSONObject updateAddress(tryUpdateMemDto updateMemDto,HttpServletRequest request) {
 		System.out.println("updateAddress");
-		
-		return null;
+		Map<String, Object>map=utillService.getEmailAndRole(request);
+		String email=(String)map.get("email");
+		String role=(String)map.get("role");
+		String postcode=updateMemDto.getPostcode();
+		String address=updateMemDto.getAddress();
+		String detailAddress=updateMemDto.getDetailAddress();
+		if(utillService.checkNull(postcode)||utillService.checkNull(address)||utillService.checkNull(detailAddress)) {
+			return utillService.makeJson(false, "빈칸이 존재합니다");
+		}
+		map.put("address", postcode+","+address+","+detailAddress);
+		memberDao.updateAddress(map);
+		return utillService.makeJson(true, "주소변경이 완료되었습니다");
 	}
 	public void getMemebersOrMember(HttpServletRequest request,Model model) {
 		System.out.println("getMemebersOrMember");

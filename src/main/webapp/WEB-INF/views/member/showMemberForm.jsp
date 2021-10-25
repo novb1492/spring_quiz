@@ -66,6 +66,10 @@ function changeAddress() {
 	});
 	 var reuslt=requestPutToServer('/demo4/user/crud/change?detail=address',data);
 	 console.log(result);
+	 alert(result.message);
+	 if(!result.flag){
+		 location.reload();
+	 }
 }
 function sample6_execDaumPostcode() {
     new daum.Postcode({
