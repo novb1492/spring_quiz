@@ -43,6 +43,7 @@ public class naverService {
 	        LOGGER.info("tryNaverLogin naverService");
 	        memberDto uservo=naverLoginService.tryNaverLogin(getToken(request.getParameter("code"), request.getParameter("state")), response);
 	        request.getSession().setAttribute("email", uservo.getEmail());
+	        request.getSession().setAttribute("role", uservo.getRole());
 		       utillService.doRedirect(response, "/demo4/");
 	       
 	        

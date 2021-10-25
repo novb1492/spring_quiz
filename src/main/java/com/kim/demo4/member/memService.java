@@ -8,6 +8,7 @@ import java.util.Map;
 import java.util.Optional;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.json.simple.JSONObject;
 import org.slf4j.Logger;
@@ -37,10 +38,26 @@ public class memService {
 		if(detail.equals("all")) {
 			getMembers(request, model);
 		}else if(detail.equals("one")) {
-			
+			getMember(request, model);
 		}else {
 			throw new RuntimeException("잘못된 디테일값입니다");
 		}
+	}
+	private void getMember(HttpServletRequest request,Model model) {
+		System.out.println("getMember");
+		memberDto memberDto=memberDao.findByEmail(request.getParameter("email"));
+		HttpSession session=request.getSession();
+		String role=session.getAttribute("role").toString();
+		String loginEmail=session.getAttribute("email").toString();
+		if(!loginEmail.equals(memberDto.getEmail())&&!role.equals("admin")) {
+			model.addAttribute("dto", null);
+			return;
+		}
+		if(memberDto.getId()==0) {
+			model.addAttribute("dto", null);
+			return;
+		}
+		model.addAttribute("dto", memberDto);
 	}
 	private void getMembers(HttpServletRequest request,Model model) {
 		System.out.println("getMembers");
@@ -48,15 +65,12 @@ public class memService {
 		String keyword=request.getParameter("keyword");
 		Map<String, Object>map=utillService.getStart(page, pagesize);
 		List<getMembersDto>getMembersDtos=getDtos(map, keyword);
-		if(getMembersDtos.size()==0) {
+		int totalPage=utillService.getTotalPage(getMembersDtos.get(0).getTotalCount(), pagesize);
+		if(getMembersDtos.size()==0||page>totalPage) {
 			model.addAttribute("page", 1);
 			model.addAttribute("totalPage", 1);
 			model.addAttribute("dtos", null);
 			return;
-		}
-		int totalPage=utillService.getTotalPage(getMembersDtos.get(0).getTotalCount(), pagesize);
-		if(page>totalPage) {
-			throw  new RuntimeException("마지막페이지입니다");
 		}
 		List<memberDto>memberDtos=new ArrayList<memberDto>();
 		for(getMembersDto g: getMembersDtos) {
@@ -110,6 +124,7 @@ public class memService {
 				throw new RuntimeException("비밀번호 불일치");
 			}
 			request.getSession().setAttribute("email",loginDto.getEmail() );
+			request.getSession().setAttribute("role",memberDto.getRole());
 			return utillService.makeJson(true, "로그인성공");
 		} catch (NullPointerException e) {
 			message="존재하는 이메일이 아닙니다";

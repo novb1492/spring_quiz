@@ -17,4 +17,5 @@ public interface memberDao {
 	public memberDto findByEmail(String email);
 	public List<getMembersDto>selectAll(Map<String, Object>map);
 	public List<getMembersDto>selectAllByKeyword(Map<String, Object>map);
+	public memberDto findById(int id);
 }

@@ -35,14 +35,13 @@ if(keyword==null){
 			<%
 				if(e.equals(m.getEmail())||m.getRole().equals("admin")){
 					%>
-					<td style="width: 330px; height:40px;" align="center"><a href="/demo4/showMemberPage?detail=one&id=<%=m.getId()%>&inPage=<%=nowPage%>&keyword=<%=keyword%>"><%=m.getEmail()%></a></td>
+					<td style="width: 330px; height:40px;" align="center"><a href="/demo4/showMemberPage?detail=one&email=<%=m.getEmail()%>&inPage=<%=nowPage%>&keyword=<%=keyword%>"><%=m.getEmail()%></a></td>
 				<%}else{	
 				%>	
-				<td style="width: 330px; height:40px;" align="center"><%=m.getEmail()%></td>
+					<td style="width: 330px; height:40px;" align="center"><%=m.getEmail()%></td>
 				<%}
 			
 			%>
-		<td style="width: 330px; height:40px;" align="center"><a href="/demo4/articlePage?bid=<%=m.getId()%>&inPage=<%=nowPage%>&keyword=<%=keyword%>"><%=m.getEmail()%></a></td>
 		<td style="width: 120px; height:40px;" align="center"><%=m.getCreated() %></td>
 		<td style="width: 80px; height:40px;" align="center"><%=m.getGender() %></td>
 	</tr>

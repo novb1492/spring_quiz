@@ -92,11 +92,11 @@ public class HomeController {
 		memService.getMemebersOrMember(request, model);
 		return "/member/membersForm";
 	}
-	@GetMapping("/memberPage")
+	@GetMapping("/showMemberPage")
 	public String showMemberPage(HttpServletRequest request,HttpSession session,HttpServletResponse response,Model model) {
 		utillService.checkLogin(session, response);
 		memService.getMemebersOrMember(request, model);
-		return "/member/membersForm";
+		return "/member/showMemberForm";
 	}
 
 }

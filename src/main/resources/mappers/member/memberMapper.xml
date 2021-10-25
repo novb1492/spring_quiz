@@ -16,7 +16,10 @@
 		<result property="gender" column="gender"/>
 	</resultMap>
 	<select id="findByEmail" resultMap="member">
-		select email,pwd from member where email=#{email}
+		select * from member where email=#{email}
+	</select>
+	<select id="findById" resultMap="member">
+		select * from member where id=#{id}
 	</select>
 		<resultMap type="com.kim.demo4.member.getMembersDto" id="getMembersDto">
 		<result property="id" column="id"/>
@@ -33,7 +36,7 @@
 	<select id="selectAll" parameterType="Map"  resultMap="getMembersDto" >
 		select b.*,(select count(*) from member)totalcount from(select ROW_NUMBER() OVER (ORDER BY id desc)  num, a.* from member a ) b where num between #{start} and #{end}
 	</select>
-		<select id="selectAllByKeyword" parameterType="Map" resultMap="getMembersDto" >
+	<select id="selectAllByKeyword" parameterType="Map" resultMap="getMembersDto" >
 		select b.*,(select count(*) from member where email like '%'||#{keyword}||'%')totalcount from(select ROW_NUMBER() OVER (ORDER BY id desc)  num, a.* from member a ) b where email like '%'||#{keyword}||'%' and num between #{start} and #{end}
 	</select>
 </mapper>

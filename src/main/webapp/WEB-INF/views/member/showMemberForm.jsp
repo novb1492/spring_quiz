@@ -1,3 +1,4 @@
+<%@page import="com.kim.demo4.member.memberDto"%>
 <%@page import="com.kim.demo4.board.getAllBoardDto"%>
 <%@page import="com.kim.demo4.stringEnums"%>
 <%@page import="com.kim.demo4.board.boardDto"%>
@@ -6,7 +7,7 @@
 <center>
 <%@ include file="../common/top.jsp" %>
 <%
-
+memberDto dto=(memberDto)request.getAttribute("dto");
 %>
 
 <table style="width: 650px;">
