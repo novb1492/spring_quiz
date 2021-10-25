@@ -30,7 +30,7 @@ function login() {
 	});
 	 var reuslt=requestToServer('/demo4/login',data);
 	 if(reuslt.flag){
-		 location.href='/demo4/boardPage';
+		 location.href='/demo4/';
 	 }else{
 		 alert(result.message);
 	 }

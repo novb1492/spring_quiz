@@ -14,7 +14,6 @@
 	<td style="height:50px;"><%@ include file="common/footer.jspf" %></td>
 </tr>
 </table>
-<input type="button" value="test" onclick="test()">
 </div>
 </body>
 </html>
