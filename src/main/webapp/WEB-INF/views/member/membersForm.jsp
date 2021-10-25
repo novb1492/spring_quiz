@@ -8,6 +8,7 @@
 <%@ include file="../common/top.jsp" %>
 <%
 List<memberDto>dtos=(List<memberDto>)request.getAttribute(stringEnums.dtos.getValue());
+String e=session.getAttribute("email").toString();
 int nowPage=(int)request.getAttribute("page");
 int totalPage=(int)request.getAttribute("totalPage");
 String keyword=request.getParameter("keyword");
@@ -31,6 +32,16 @@ if(keyword==null){
 		for(memberDto m:dtos){
 			%>
 			<tr>
+			<%
+				if(e.equals(m.getEmail())){
+					%>
+					<td style="width: 330px; height:40px;" align="center"><a href="/demo4/articlePage?bid=<%=m.getId()%>&inPage=<%=nowPage%>&keyword=<%=keyword%>"><%=m.getEmail()%></a></td>
+				<%}else{	
+				%>	
+				<td style="width: 330px; height:40px;" align="center"><%=m.getEmail()%></td>
+				<%}
+			
+			%>
 		<td style="width: 330px; height:40px;" align="center"><a href="/demo4/articlePage?bid=<%=m.getId()%>&inPage=<%=nowPage%>&keyword=<%=keyword%>"><%=m.getEmail()%></a></td>
 		<td style="width: 120px; height:40px;" align="center"><%=m.getCreated() %></td>
 		<td style="width: 80px; height:40px;" align="center"><%=m.getGender() %></td>
