@@ -53,6 +53,34 @@ public class boardService {
 		map.put("text",  updateArticleDto.getText());
 		map.put("id", boardDto.getId());
 		boardDao.updateArticle(map);
+		List<String>originImage=utillService.getImgSrc(boardDto.getText());
+		List<String>dtoImages=utillService.getImgSrc(updateArticleDto.getText());
+		if(dtoImages.isEmpty()) {
+			if(!originImage.isEmpty()) {
+				System.out.println("모든사진이 삭제되었습니다");
+				for(String s:originImage) {
+					uploadService.deleteImg(s.split("/")[5]);
+				}
+			}
+		}else if(!originImage.isEmpty()) {
+			int originImageSize=originImage.size();
+			int dtoImagesSize=dtoImages.size();
+			for(int i=0;i<originImageSize;i++) {
+				for(int ii=0;ii<dtoImagesSize;ii++) {
+					String s=originImage.get(i);
+					String n=dtoImages.get(ii);
+					if(s.equals(n)) {
+						System.out.println("이전 사진 존재");
+						break;
+					}else if(!s.equals(n)&&ii==dtoImagesSize-1) {
+						System.out.println("삭제된 사진 발견");
+						uploadService.deleteImg(s.split("/")[5]);
+					}
+				}
+			}
+				
+			
+		}
 		return utillService.makeJson(true, "글수정완료");
 		
 	 }
