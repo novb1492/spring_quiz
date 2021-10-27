@@ -16,8 +16,8 @@ import com.amazonaws.services.s3.AmazonS3;
 @Service
 public class awsService {
 	
-	@Autowired
-    private awsConfig awsConfig;
+	  @Autowired
+	    private AmazonS3 amazonS3;
 	
     private final String awsS3Url="https://s3.ap-northeast-2.amazonaws.com/kimsshop/images/";
     public JSONObject  uploadAws(MultipartFile multipartFile,String bucketName) {
@@ -25,12 +25,9 @@ public class awsService {
         System.out.println("uploadAws");
         File file=convert(multipartFile);
         String saveName=file.getName();
-        try {
-			awsConfig.fileupload(bucketName, saveName, file);
-		} catch (FileNotFoundException e) {
+ 
+        	amazonS3.putObject(bucketName, saveName, file);
 		
-			e.printStackTrace();
-		}
     
         file.delete();
         System.out.println("파일업로드 완료");
@@ -52,6 +49,6 @@ public class awsService {
         return file;
     }
     public void deleteFile(String bucktetName,String fileName) {
-    	awsConfig.deleteFile(bucktetName, fileName);
+    	amazonS3.deleteObject(bucktetName, fileName);
     }
 }
