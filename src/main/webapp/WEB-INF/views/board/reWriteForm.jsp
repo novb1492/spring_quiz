@@ -147,20 +147,5 @@ window.onload = function () {
 		   
 	} );
 };
-window.onbeforeunload = function(e) {
-	if(flag){
-		cancleArticle();
-	}
-};
-function cancleArticle() {
-console.log('a');
- let data=JSON.stringify({
-	 "originText":'<%=boardDto.getText()%>',
-	 "text":editor.getData(),
-	 "detail":'update'
-});
- console.log(data);
- requestToServer2('/demo4/deleteimg',data);
 
-}
 </script>
