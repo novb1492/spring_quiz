@@ -7,8 +7,8 @@ spring 레거시에서
 프론트 템플릿은 학원에서 제공해주신거고
 백엔드를 만드는 과제였습니다
 
-사용에디터 : ckeditor5
-클라우드 : S3
+사용에디터 : ckeditor5  
+클라우드 : S3  
 
 summernote/ckeditor5
 둘다 연동할 수 있지만
