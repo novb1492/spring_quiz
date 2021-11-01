@@ -10,12 +10,12 @@ spring 레거시에서
 사용에디터 : ckeditor5  
 클라우드 : S3  
 
-summernote/ckeditor5
-둘다 연동할 수 있지만
-summernote는 부트스트랩/j쿼리가 필수지만
-이미지업로드기능이 더 쉽다고생각합니다
-ckediotr5는 사진업로드기능은 더어렵지만
-혼자 붙힐수있고 디자인도 더깔끔해서 선호하는편입니다
+summernote/ckeditor5  
+둘다 연동할 수 있지만  
+summernote는 부트스트랩/j쿼리가 필수지만  
+이미지업로드기능이 더 쉽다고생각합니다  
+ckediotr5는 사진업로드기능은 더어렵지만  
+혼자 붙힐수있고 디자인도 더깔끔해서 선호하는편입니다  
 
 multiparthttpservletrequest 에서 고생을 했습니다
 1.부트에서는 기본제공 기능으로 사용중인데
