@@ -17,8 +17,7 @@
 		select b.*,(select count(*) from board)totalcount from(select ROW_NUMBER() OVER (ORDER BY id desc)  num, a.* from board a ) b where num between #{start} and #{end}
 	</select>
 	<select id="selectAllWithKeyword" parameterType="Map" resultMap="getAllBoardDto" >
-		select b.*,(select count(*) from board where title like '%'||#{keyword}||'%')totalcount from(select ROW_NUMBER() OVER (ORDER BY id desc)  num, a.* from board a ) b where title like '%'||#{keyword}||'%' and num between #{start} and #{end}
-	</select>
+select b.*,(select count(*) from board where title like '%'||#{keyword}||'%')totalcount from(select ROW_NUMBER() OVER (ORDER BY id desc)  num, a.* from board a  where a.title like '%'||#{keyword}||'%') b where num between #{start} and #{end} 	</select>
 		<resultMap type="com.kim.demo4.board.boardDto" id="boardDto">
 		<result property="id" column="id"/>
 		<result property="title" column="title"/>

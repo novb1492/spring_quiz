@@ -24,3 +24,13 @@ multiparthttpservletrequest 에서 고생을 했습니다
 이유는 모르겠지만 validation이 요청을 가로채서
 비워버리는 바람에 원인파악이 뭔지 한참찾았습니다
 
+페이징 쿼리문 수정
+기존
+select b.*,(select count(*) from board where title like '%'||#{keyword}||'%')totalcount from(select ROW_NUMBER() OVER (ORDER BY id desc)  num, a.* from board a ) b where title like '%'||#{keyword}||'%' and num between #{start} and #{end}
+수정
+select b.*,(select count(*) from board where title like '%'||#{keyword}||'%')totalcount from(select ROW_NUMBER() OVER (ORDER BY id desc)  num, a.* from board a  where a.title like '%'||#{keyword}||'%') b where num between #{start} and #{end}  
+  
+뒤늦게 발견 했습니다
+
+
+
